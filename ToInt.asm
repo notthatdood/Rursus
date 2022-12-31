@@ -12,7 +12,7 @@ datos segment
     bool dw 1
     fileName db "filemon.txt",0
     string db "abcde$"
-    set dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
+    set dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85,'$'
     lenSet db 18
     Result dw 0
     Base dw 10

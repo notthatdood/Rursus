@@ -345,9 +345,6 @@ main: mov ax, pila
 
 ;fin de la llamadad de intersección
 
-
-
-
     mov ax, 4C00h
     int 21h 
 

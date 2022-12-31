@@ -17,13 +17,12 @@ datos segment
     bool dw 0
     integer dw 15
     string db "abcde$"
-    set dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
-    lenSet db 18
+    set dw 49,65,66,67,68,69,48,'$'
     Result dw 0
     Base dw 10
     len dw 0
 
-    fileName db 128 (0)
+    fileName db 128 dup(0)
     fileHandle dw ?
     fileBuffer db 128 dup('$')
 
@@ -365,10 +364,53 @@ stringToFile endP
 
 setToFile proc
     ;espera el conjunto a convertir en la variable set
-    ;el string debe ser menor a 122 caracteres
+    ;el set debe ser menor a 122 words
+    ; solo tomará en cuenta la parte inferior de cada word al hacer la conversión
     ;espera el nombre del archivo en fileName
     pushRegs
+    push di
+    push si
 
+    lea di, set
+    lea si, fileName
+
+    contSetTF:
+        mov ax, word ptr[di]
+        cmp ax, '$'
+        je endSetTF
+        mov byte ptr[si], al
+        inc di
+        inc di
+        inc si
+        jmp contSetTF
+    endSetTF:
+    mov al, '.'
+    mov byte ptr[si], al
+
+    inc si
+    mov al, 't'
+    mov byte ptr[si], al
+
+    inc si
+    mov al, 'x'
+    mov byte ptr[si], al
+
+    inc si
+    mov al, 't'
+    mov byte ptr[si], al
+
+    inc si
+    mov al, 0
+    mov byte ptr[si], al
+
+    ;lea si, fileName
+    ;call printZString
+
+    lea dx, fileName
+    call crFile
+
+    pop si
+    pop di
     popRegs
     ret
 setToFile endP
@@ -382,7 +424,8 @@ main: mov ax, pila
     ;call charToFile
     ;call boolToFile
     ;call intToFile
-    call stringToFile
+    ;call stringToFile
+    ;call setToFile
 
     mov ax, 4C00h
     int 21h 
