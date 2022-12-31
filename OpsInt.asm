@@ -42,11 +42,10 @@ pila endS
 codigo segment
     Assume CS:codigo,DS:datos,SS:pila
 
-printAXAux proc    
-; imprime a la salida estandar un numero que supone estar en el AX
-; supone que es un numero entero en 16 bits.
-; lo imprime en la base que indica la variable Base del Data Segment.  
-    
+printAXAux proc     
+    ; imprime a la salida estandar un numero que supone estar en el AX
+    ; supone que es un numero entero en 16 bits. 
+    ; lo imprime en la base que indica la variable Base del Data Segment. 
     push AX
     push BX
     push CX                           
@@ -77,6 +76,7 @@ prnPAX: int 21h
 printAXAux endP
 
 printAX proc
+    ; Decide si un número es positivo o negativo y se imprime en la salida principal
     ; Números superiores a 32767 serán considerados como negativos
     pushRegs
     cmp ax, 0

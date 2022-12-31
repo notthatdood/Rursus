@@ -11,10 +11,13 @@ datos segment
 
     base dw 10
     len db 0
-    set1 dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85,'$'
-    set2 dw 11,1,12,13,14,15,5,16,17,18,176,19,10,20,'$'
+    set1 dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
+    lenSet1 db 18
+    set2 dw 11,1,12,13,14,15,5,16,17,18,176,19,10,20
+    lenSet2 db 14
     dos db 2
-    resSet dw  128 dup('$')
+    resSet dw  128 dup(?)
+    lenResSet db 0
 datos endS
 
 ;sección de macros
@@ -92,42 +95,34 @@ camLin Proc
     ret
 camLin EndP
 
-;imprime un conjunto, asume que el puntero al conjunto está en si 
+
+;imprime un arreglo, asume que el puntero al arreglo está en si y su len en la variable len en el data segment
 printSet Proc
     pushRegs
-    push si
-
-    mov ax, word ptr[si]
-    cmp al, '$'
-    je endPS
-    call printAX
-
-    contPS:
-    inc si
-    inc si
-
-    
-    xor ax, ax
-    mov ax, word ptr[si]
-    cmp al, '$'
-    je endPS
-    push ax
-    mov dl, ','
-    mov al, 0
-    mov ah, 02h
-    int 21h
-    pop ax
-    call printAX
-    jmp contPS
-
-    endPS:
-
-    pop si
+    mov cl, 0
+    printing:
+        cmp cl,0
+        je sincoma
+        mov dl, ','
+        mov al, 0
+        mov ah, 02h
+        int 21h
+        sincoma:
+            mov ax, word ptr [si]
+            call printAX
+            inc si
+            inc si
+            inc cl
+            cmp cl, len
+            jl printing
     popRegs
     ret
 printSet EndP
 
+
+
 ;asume que en si y di hay pointers a ambos conjuntos
+;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
 ;va a tomar los elementos de ambos y unirlos 
 ;el resultado va en la variable resSet
 joinSet Proc
@@ -135,15 +130,17 @@ joinSet Proc
     push di
     push si
     call copySet
+    mov cx, 0
     lea si, resSet
     push si
     ;recorre el segundo conjunto y va agregando los elementos no repetidos al primero
     joinlp1:
         pop si
         push si
+        cmp cl, lenSet2
+        jge finJoin
+        mov ch, 0
         mov bx, word ptr [di]
-        cmp bx, '$'
-        je finJoin
         inc di
         inc di
         ;recorre el primer conjunto buscando si se repite el elemento y lo agrega al final si no
@@ -153,19 +150,17 @@ joinSet Proc
             je skipElementU
             inc si
             inc si
-            cmp ax, '$'
-            je addElementU
+            inc ch
+            cmp ch, lenResSet
+            jge addElementU
             jmp joinlp2
             addElementU:
-                dec si
-                dec si
-                mov word ptr [si], bx
-                inc si 
-                inc si
-                mov bx, '$'
+                inc lenResSet
+                inc cl
                 mov word ptr [si], bx
                 jmp joinlp1
             skipElementU:
+                inc cl
                 jmp joinlp1
     finJoin:
     pop si
@@ -175,26 +170,26 @@ joinSet Proc
     ret
 joinSet EndP
 
-;asume que en si está el pointer al conjunto
+;asume que en si está el pointer al conjunto 1
+;asume el tamaño del conjunto en la variable lenSet1
 ;es una función auxiliar para copiar el primer conjunto a uno nuevo
 copySet Proc
     pushRegs
     push si
     push di
 
-
+    mov cx, 0
     lea di, resSet
-    mov ax, word ptr[si]
-    mov word ptr[di], ax
-
     copylp:
+        mov ax, word ptr[si]
+        mov word ptr[di], ax
+        inc lenResSet
         inc si 
         inc si
         inc di
         inc di
-        mov ax, word ptr[si]
-        mov word ptr[di], ax
-        cmp al, '$'
+        inc cl
+        cmp cl, lenSet1
         jge finCopy
         jmp copylp
     finCopy:
@@ -205,59 +200,6 @@ copySet Proc
     ret
 copySet EndP
 
-;;asume que en si y di hay pointers a ambos conjuntos
-;;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
-;;va a tomar los elementos de ambos e intersecarlos
-;;el resultado va en la variable resSet
-;interSet Proc
-;    pushRegs
-;    push si
-;    push di
-;    mov cx, 0
-;    lea dx, resSet
-;    interlp1:
-;        pop di
-;        push di
-;        cmp cl, lenSet1
-;        jge finInter
-;        mov ch, 0 
-;        mov ax, word ptr[si]
-;        inc si
-;        inc si
-;        interlp2:
-;            mov bx, word ptr[di]
-;            cmp ax, bx
-;            je skipElementI
-;            inc di
-;            inc di
-;            inc ch
-;            cmp ch, lenSet2
-;            jge addElementI
-;            jmp interlp2
-;            addElementI:
-;                push si 
-;                mov si, dx
-;                inc lenResSet
-;                mov word ptr[si], ax
-;                inc dx
-;                inc dx
-;                inc cl
-;                pop si
-;                jmp interlp1
-;
-;            skipElementI:
-;                ;call printAX
-;                inc cl
-;                jmp interlp1
-;    
-;    finInter:
-;
-;    pop di
-;    pop si
-;    popRegs
-;    ret
-;interSet EndP
-
 ;asume que en si y di hay pointers a ambos conjuntos
 ;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
 ;va a tomar los elementos de ambos e intersecarlos
@@ -266,13 +208,15 @@ interSet Proc
     pushRegs
     push si
     push di
+    mov cx, 0
     lea dx, resSet
     interlp1:
         pop di
         push di
+        cmp cl, lenSet1
+        jge finInter
+        mov ch, 0 
         mov ax, word ptr[si]
-        cmp ax, '$'
-        je finInter
         inc si
         inc si
         interlp2:
@@ -281,31 +225,35 @@ interSet Proc
             je skipElementI
             inc di
             inc di
-            cmp bx, '$' 
+            inc ch
+            cmp ch, lenSet2
             jge addElementI
             jmp interlp2
             addElementI:
                 push si 
                 mov si, dx
+                inc lenResSet
                 mov word ptr[si], ax
                 inc dx
                 inc dx
+                inc cl
                 pop si
                 jmp interlp1
 
             skipElementI:
+                ;call printAX
+                inc cl
                 jmp interlp1
     
     finInter:
-    mov si, dx
-    mov ax, '$'
-    mov word ptr[si], ax
 
     pop di
     pop si
     popRegs
     ret
 interSet EndP
+
+
 
 
 
@@ -326,25 +274,28 @@ main: mov ax, pila
 
     call joinSet
 
+    mov al, lenResSet
+    mov len, al 
+
     lea si, resSet
     call printSet
-
+    call camLin
+    call camLin
 ;fin de la llamada de union
-    
-    call camLin
-    call camLin
-
 ;inicio de la llamada de intersección
+    mov ax, 0
+    mov lenResSet, 0
     lea si, set1
     lea di, set2
 
     call interSet
 
+    mov al, lenResSet
+    mov len, al 
     lea si, resSet
     call printSet
-
 ;fin de la llamadad de intersección
-
+    
 
 
 
