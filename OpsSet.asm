@@ -11,13 +11,13 @@ datos segment
 
     base dw 10
     len db 0
-    conj1 dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
-    lenConj1 db 18
-    conj2 dw 11,1,12,13,14,15,5,16,17,18,176,19,10,20
-    lenConj2 db 14
+    set1 dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
+    lenSet1 db 18
+    set2 dw 11,1,12,13,14,15,5,16,17,18,176,19,10,20
+    lenSet2 db 14
     dos db 2
-    resConj dw  128 dup(?)
-    lenResConj db 0
+    resSet dw  128 dup(?)
+    lenResSet db 0
 datos endS
 
 ;sección de macros
@@ -97,7 +97,7 @@ camLin EndP
 
 
 ;imprime un arreglo, asume que el puntero al arreglo está en si y su len en la variable len en el data segment
-printConj Proc
+printSet Proc
     pushRegs
     mov cl, 0
     printing:
@@ -117,27 +117,27 @@ printConj Proc
             jl printing
     popRegs
     ret
-printConj EndP
+printSet EndP
 
 
 
 ;asume que en si y di hay pointers a ambos conjuntos
-;asume el tamaño de los conjuntos en las variables lenConj1 y lenConj2
+;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
 ;va a tomar los elementos de ambos y unirlos 
-;el resultado va en la variable resConj
-joinConj Proc
+;el resultado va en la variable resSet
+joinSet Proc
     pushRegs
     push di
     push si
-    call copyConj
+    call copySet
     mov cx, 0
-    lea si, resConj
+    lea si, resSet
     push si
     ;recorre el segundo conjunto y va agregando los elementos no repetidos al primero
     joinlp1:
         pop si
         push si
-        cmp cl, lenConj2
+        cmp cl, lenSet2
         jge finJoin
         mov ch, 0
         mov bx, word ptr [di]
@@ -151,11 +151,11 @@ joinConj Proc
             inc si
             inc si
             inc ch
-            cmp ch, lenResConj
+            cmp ch, lenResSet
             jge addElementU
             jmp joinlp2
             addElementU:
-                inc lenResConj
+                inc lenResSet
                 inc cl
                 mov word ptr [si], bx
                 jmp joinlp1
@@ -168,28 +168,28 @@ joinConj Proc
     pop di
     popRegs
     ret
-joinConj EndP
+joinSet EndP
 
 ;asume que en si está el pointer al conjunto 1
-;asume el tamaño del conjunto en la variable lenConj1
+;asume el tamaño del conjunto en la variable lenSet1
 ;es una función auxiliar para copiar el primer conjunto a uno nuevo
-copyConj Proc
+copySet Proc
     pushRegs
     push si
     push di
 
     mov cx, 0
-    lea di, resConj
+    lea di, resSet
     copylp:
         mov ax, word ptr[si]
         mov word ptr[di], ax
-        inc lenResConj
+        inc lenResSet
         inc si 
         inc si
         inc di
         inc di
         inc cl
-        cmp cl, lenConj1
+        cmp cl, lenSet1
         jge finCopy
         jmp copylp
     finCopy:
@@ -198,22 +198,22 @@ copyConj Proc
     pop si
     popRegs
     ret
-copyConj EndP
+copySet EndP
 
 ;asume que en si y di hay pointers a ambos conjuntos
-;asume el tamaño de los conjuntos en las variables lenConj1 y lenConj2
+;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
 ;va a tomar los elementos de ambos e intersecarlos
-;el resultado va en la variable resConj
-interConj Proc
+;el resultado va en la variable resSet
+interSet Proc
     pushRegs
     push si
     push di
     mov cx, 0
-    lea dx, resConj
+    lea dx, resSet
     interlp1:
         pop di
         push di
-        cmp cl, lenConj1
+        cmp cl, lenSet1
         jge finInter
         mov ch, 0 
         mov ax, word ptr[si]
@@ -226,13 +226,13 @@ interConj Proc
             inc di
             inc di
             inc ch
-            cmp ch, lenConj2
+            cmp ch, lenSet2
             jge addElementI
             jmp interlp2
             addElementI:
                 push si 
                 mov si, dx
-                inc lenResConj
+                inc lenResSet
                 mov word ptr[si], ax
                 inc dx
                 inc dx
@@ -251,7 +251,7 @@ interConj Proc
     pop si
     popRegs
     ret
-interConj EndP
+interSet EndP
 
 
 
@@ -269,31 +269,31 @@ main: mov ax, pila
 ; solo usar uno a la vez, si se usa uno después del otro le va a caer encima al conjunto de respuesta
 
 ;inicio de la llamada de union
-    lea si, conj1
-    lea di, conj2
+    lea si, set1
+    lea di, set2
 
-    call joinConj
+    call joinSet
 
-    mov al, lenResConj
+    mov al, lenResSet
     mov len, al 
 
-    lea si, resConj
-    call printConj
+    lea si, resSet
+    call printSet
     call camLin
     call camLin
 ;fin de la llamada de union
 ;inicio de la llamada de intersección
     mov ax, 0
-    mov lenResConj, 0
-    lea si, conj1
-    lea di, conj2
+    mov lenResSet, 0
+    lea si, set1
+    lea di, set2
 
-    call interConj
+    call interSet
 
-    mov al, lenResConj
+    mov al, lenResSet
     mov len, al 
-    lea si, resConj
-    call printConj
+    lea si, resSet
+    call printSet
 ;fin de la llamadad de intersección
     
 
