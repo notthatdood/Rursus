@@ -1,4 +1,11 @@
-; Este es el machote para tener las partes básicas de un programa.
+; Este programa va a tener las conversiones de otros tipos a Char
+; Rutinas:
+    ; 1. Int a Char: Va a tomar el valor en ascii del caracter, si el número se excede, se le asignará un 127
+    ; 2. Bool a Char: '1' (49) si es verdadero '0' (48) si es falso
+    ; 3. File a Char: va a tomar la primera letra del nombre
+    ; 4. String a Char: va a tomar la primera letra del string
+    ; 5. Set a Char: va a tomar el primer elemento del conjunto y le va a aplicar la misma operación de los Int
+
 
 datos segment
 
@@ -93,6 +100,15 @@ printZString proc
     popRegs
     ret
 printZString endP
+
+intToChar proc
+intToChar endP
+
+boolToChar proc
+boolToChar endP
+
+fileToChar proc
+fileToChar endP
 
 main: mov ax, pila
     mov ss, ax

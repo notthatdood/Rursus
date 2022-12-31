@@ -1,4 +1,4 @@
-; Este programa va a tener las conversiones de los tipos atómicos a Int
+; Este programa va a tener las conversiones de otros tipos a Int
 ; Rutinas
     ; 1. Char a Int: Va a tomar el valor en ascii del caracter
     ; 2. Bool a Int: 1 si es verdadero 0 si es falso
