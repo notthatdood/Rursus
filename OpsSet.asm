@@ -14,7 +14,7 @@ datos segment
     set1 dw 1,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85,'$'
     set2 dw 11,1,12,13,14,15,5,16,17,18,176,19,10,20,'$'
     dos db 2
-    resSet dw  128 dup('$')
+    resSet dw 128 dup('$')
 datos endS
 
 ;sección de macros
@@ -205,61 +205,7 @@ copySet Proc
     ret
 copySet EndP
 
-;;asume que en si y di hay pointers a ambos conjuntos
-;;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
-;;va a tomar los elementos de ambos e intersecarlos
-;;el resultado va en la variable resSet
-;interSet Proc
-;    pushRegs
-;    push si
-;    push di
-;    mov cx, 0
-;    lea dx, resSet
-;    interlp1:
-;        pop di
-;        push di
-;        cmp cl, lenSet1
-;        jge finInter
-;        mov ch, 0 
-;        mov ax, word ptr[si]
-;        inc si
-;        inc si
-;        interlp2:
-;            mov bx, word ptr[di]
-;            cmp ax, bx
-;            je skipElementI
-;            inc di
-;            inc di
-;            inc ch
-;            cmp ch, lenSet2
-;            jge addElementI
-;            jmp interlp2
-;            addElementI:
-;                push si 
-;                mov si, dx
-;                inc lenResSet
-;                mov word ptr[si], ax
-;                inc dx
-;                inc dx
-;                inc cl
-;                pop si
-;                jmp interlp1
-;
-;            skipElementI:
-;                ;call printAX
-;                inc cl
-;                jmp interlp1
-;    
-;    finInter:
-;
-;    pop di
-;    pop si
-;    popRegs
-;    ret
-;interSet EndP
-
 ;asume que en si y di hay pointers a ambos conjuntos
-;asume el tamaño de los conjuntos en las variables lenSet1 y lenSet2
 ;va a tomar los elementos de ambos e intersecarlos
 ;el resultado va en la variable resSet
 interSet Proc
