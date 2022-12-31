@@ -94,6 +94,38 @@ printZString proc
     ret
 printZString endP
 
+zStringLen proc
+    ;asume la dirección del string en si deja el resultado en len
+    pushRegs
+    xor cx, cx
+    contZLen:
+        inc cx
+        mov al, byte ptr [si]
+        inc si
+        cmp al, 0
+        jne contZLen
+    dec cx
+    mov len, cx
+    popRegs
+    ret
+zStringLen endP
+
+dStringLen proc
+    ;asume la dirección del string en si deja el resultado en len
+    pushRegs
+    xor cx, cx
+    contDLen:
+        inc cx
+        mov al, byte ptr [si]
+        inc si
+        cmp al, '$'
+        jne contDLen
+    dec cx
+    mov len, cx
+    popRegs
+    ret
+dStringLen endP
+
 main: mov ax, pila
     mov ss, ax
 

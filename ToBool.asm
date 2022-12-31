@@ -1,19 +1,18 @@
-; Este programa va a tener las conversiones de otros tipos a Char
+; Este programa va a tener las conversiones de otros tipos a Bool
 ; Rutinas:
-    ; 1. Int a Char: Va a tomar el valor en ascii del caracter, si el número se excede, se le asignará un 127
-    ; 2. Bool a Char: '1' (49) si es verdadero '0' (48) si es falso
-    ; 3. File a Char: va a tomar la primera letra del nombre
-    ; 4. String a Char: va a tomar la primera letra del string
-    ; 5. Set a Char: va a tomar el primer elemento del conjunto y le va a aplicar la misma operación de los Int
-
+    ; 1. Int a Bool: Si es 0 o 1 lo va a dejar quieto, si es mayor a 1 se le asignará un 1, si es menor a 0 será 0
+    ; 2. Char a Bool: Si el caracter no tiene por valor 0 va a ser 1, de lo contrario va a ser 0
+    ; 3. File a Bool: Se va a tomar la primera letra del string se le aplicará el mismo proceso que a los Char
+    ; 4. String a Bool: va a tomar el la primera letra del nombre y se le aplicará el mismo proceso que a los Char
+    ; 5. Set a Bool: va a tomar el primer elemento del conjunto y le va a aplicar la misma operación de los Char
 
 datos segment
 
-    integer dw 67
-    bool dw 1
+    integer dw -15
+    char dw 'a'
     fileName db "filemon.txt",0
     string db "zabcde$"
-    set dw 65,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
+    set dw 0,2,3,4,5,6,7,8,9,0,11,12,13,14,15,16,17,85
     lenSet db 18
     Result dw 0
     Base dw 10
@@ -108,73 +107,118 @@ printZString proc
     ret
 printZString endP
 
-intToChar proc
+intToBool proc
     ; Espera el entero a revisar en la variable integer
     pushRegs
     mov ax, integer
-    mov bx, 127
-    cmp ax, bx
-    jl intTodoBien 
-    mov ax, bx
-    intTodoBien:
+    cmp ax, 0
+    jle intFalse
+    cmp ax, 1
+    jge intTrue
+
+    intTrue:
+    mov ax, 1
     mov Result, ax
     popRegs
     ret
-intToChar endP
+    intFalse:
+    mov ax, 0
+    mov Result, ax
+    popRegs
+    ret
+intToBool endP
 
-boolToChar proc
-    ;Espera el booleano a revisar en la variable char
+charToBool proc
+    ;Espera el caracter a revisar en la variable char
     pushRegs
-    mov ax, bool
-    add ax, 48
+    mov ax, char
+    cmp ax, 0
+    je charFalse
+    cmp ax, 1
+    jge charTrue
+
+    charTrue:
+    mov ax, 1
     mov Result, ax
     popRegs
     ret
-boolToChar endP
+    charFalse:
+    mov ax, 0
+    mov Result, ax
+    popRegs
+    ret
+charToBool endP
 
-fileToChar proc
-    ; Va a colocar en Result el primer caracter del nombre del archivo
+fileToBool proc
+    ; Va a tomar el valor del primer caracter del nombre del file
+    ; si es 0 va a quedar así, si no; va a ser 1
     ; Espera el nombre del archivo en la variable fileName
     pushRegs
     lea si, fileName
     xor ax, ax
     mov al, byte ptr [si]
+    cmp ax, 0
+    je fileFalse
+    cmp ax, 1
+    jge fileTrue
+
+    fileTrue:
+    mov ax, 1
     mov Result, ax
     popRegs
     ret
-fileToChar endP
+    fileFalse:
+    mov ax, 0
+    mov Result, ax
+    ret
+fileToBool endP
 
-stringToChar proc
+stringToBool proc
     ; Va a colocar en Result el primer caracter del string
-    ; Espera el strign en la variable string
+    ; Espera el string en la variable string
     pushRegs
     lea si, string
     xor ax, ax
     mov al, byte ptr [si]
+    cmp ax, 0
+    je stringFalse
+    cmp ax, 1
+    jge stringTrue
+
+    stringTrue:
+    mov ax, 1
     mov Result, ax
     popRegs
     ret
-stringToChar endP
+    stringFalse:
+    mov ax, 0
+    mov Result, ax
+    popRegs
+    ret
+stringToBool endP
 
-setToChar proc
-    ; Va a colocar en Result el primer valor del conjunto si es menor a 128, de lo contrario se le asignará
-    ; como valor 127
-    ; Espera el strign en la variable string
+setToBool proc
     pushRegs
     lea si, set
     xor ax, ax
     mov ax, word ptr [si]
-    cmp ax, 127
-    jg stcChange
+    cmp ax, 0
+    je setFalse
+    cmp ax, 1
+    jge setTrue
+
+    setTrue:
+    mov ax, 1
     mov Result, ax
     popRegs
     ret
-    stcChange:
-    mov ax, 127
+    setFalse:
+    mov ax, 0
     mov Result, ax
+
     popRegs
     ret
-setToChar endP
+setToBool endP
 
 main: mov ax, pila
     mov ss, ax
@@ -182,38 +226,30 @@ main: mov ax, pila
     mov ax, datos
     mov ds, ax
 
-    ;call intToChar
+    ;call intToBool
     ;mov ax, Result
-    ;mov dl, al
-    ;mov ah, 02h
-    ;int 21h
+    ;call printAX
 
-    ;call boolToChar
+    ;call charToBool
     ;mov ax, Result
-    ;mov dl, al
-    ;mov ah, 02h
-    ;int 21h
+    ;call printAX
 
-    ;call fileToChar
+    ;call fileToBool
     ;mov ax, Result
-    ;mov dl, al
-    ;mov ah, 02h
-    ;int 21h
+    ;call printAX
 
-    ;call stringToChar
+    ;call stringToBool
     ;mov ax, Result
-    ;mov dl, al
-    ;mov ah, 02h
-    ;int 21h
+    ;call printAX
 
-    ;call setToChar
+    ;call setToBool
     ;mov ax, Result
-    ;mov dl, al
-    ;mov ah, 02h
-    ;int 21h
+    ;call printAX
+    
+    
 
-    ;mov ax, 4C00h
-    ;int 21h 
+    mov ax, 4C00h
+    int 21h 
 
 codigo ends
 
