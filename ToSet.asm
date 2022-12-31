@@ -6,8 +6,6 @@
     ; 4. String a Set: Va a crear un conjunto con las letras del string
     ; 5. Int a Set: Va a crear un conjunto con el enteo como único elemento
 
-; Este es el machote para tener las partes básicas de un programa.
-
 datos segment
 
     char dw 'a'
