@@ -1,24 +1,18 @@
 "
 TODO: 
-- revisar el 'valor' que usé, creo que hay que cambiarlo para que pueda tomar mas valores
-- revisar que se puedad eclarar un arreglo y un registro correctamente
-- definir condicionales y bucles
-- permitir que los bloques de if no requieran initum y finis
-- falta poder hacer R:= 1 .
-- value o id debe poder ser una función
+- revisar el 'value' que usé, creo que hay que cambiarlo para que pueda tomar mas valores
+- value debe poder ser una llamada a función
+- pedirle al profe un ejemplo de uso de registros dentro de código 
+- falta definir las reglas de <value> para <arreglo> <conjunto> y <registro> 
 "
-
 
 "
 Cosas generales
 - Estoy usando 'id' para simbolizar cualquier identificador
-- Estoy usando 'int' para simbolizar cualquier entero
+- Estoy usando 'val' para simbolizar cualquier valor de todos los tipos menos registros, 
+    arreglos y conjuntos
 - Estoy usando '/n' para simbolizar el cambio de línea
-
 "
-
-
-
 
 0. <S> ::= "nomen " id " ./n" <seccion>
 
@@ -31,20 +25,22 @@ Cosas generales
 6. <seccion> ::= <entrada>
 7. <seccion> ::= epsilon
 
-8. <declaraConstante> ::= id "dito " valor " ./n" <declaraConstante>
+"Aquí van todas las declaraciones. "
+8. <declaraConstante> ::= id "dito " value " ./n" <declaraConstante>
 9. <declaraConstante> ::= <seccion> " /n"
 
-10. <declaraTipo> ::= id "sum " valor " ./n" <declaraTipo>
+10. <declaraTipo> ::= id "sum " value " ./n" <declaraTipo>
 11. <declaraTipo> ::= <seccion> " /n"
 
-12. <declaraVariable> ::= <tipo> id " est " valor " ./n" <declaraVariable>
-13. <declaraVariable> ::= <tipo> id " est " valor ", " <declaraVariable>
-14. <declaraVariable> :: id " est " valor ", " <declaraVariable>
-15. <declaraVariable> :: id " est " valor " ./n" <declaraVariable>
+12. <declaraVariable> ::= <tipo> id " est " value " ./n" <declaraVariable>
+13. <declaraVariable> ::= <tipo> id " est " value ", " <declaraVariable>
+14. <declaraVariable> :: id " est " value ", " <declaraVariable>
+15. <declaraVariable> :: id " est " value " ./n" <declaraVariable>
 16. <declaraVariable> :: <seccion> "/n"
 
 17. <declaraPrototipo> ::= <seccion> "/n"
 
+"Aquí como rutina me refiero a los procedimientos y a las funciones. Estas reglas sirven como ambas"
 18. <declaraRutina> ::= "directus" id "(" <declaraParametro> ")"  " ./n" <bloqueDeCodigo>
 19. <declaraRutina> ::= "directus" id "(" <declaraParametro> ") : " <tipo> " ./n" <bloqueDeCodigo>
 20. <declaraRutina> ::= epsilon
@@ -56,53 +52,111 @@ Cosas generales
 25. <declaraParametro>  ::= id <declaraParametro> " ."
 26. <declaraParametro>  ::= id <declaraParametro> 
 
-. <bloqueDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ."
+27. <declaraConjugo> ::= <tipo> id " ./n" <declaraConjugo>
+28. <declaraConjugo> ::= epsilon
 
-. <lineaDeCodigo> ::= <prefija> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <infija> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <llamarRutina> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <if> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <while> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <for> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <with> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= <bloqueDeCodigo> "/n" <lineaDeCodigo>
-. <lineaDeCodigo> ::= epsilon
+29. <bloqueDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ."
+30. <bloqueDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ./n" <bloqueDeCodigo>
+31. <bloqueDeCodigo> ::=  <lineaDeCodigo> "/n" 
 
-. <prefija> ::= <instruccion> id
+32. <lineaDeCodigo> ::= <prefija> " ./n" <lineaDeCodigo>
+33. <lineaDeCodigo> ::= <infija> " ./n" <lineaDeCodigo>
+34. <lineaDeCodigo> ::= <prefija> 
+35. <lineaDeCodigo> ::= <infija> 
+36. <lineaDeCodigo> ::= <llamarRutina> " ./n" <lineaDeCodigo>
+37. <lineaDeCodigo> ::= <if> " /n" <lineaDeCodigo>
+38. <lineaDeCodigo> ::= <while> " /n" <lineaDeCodigo>
+39. <lineaDeCodigo> ::= <for> "/n" <lineaDeCodigo>
+40. <lineaDeCodigo> ::= <with> "/n" <lineaDeCodigo>
+41. <lineaDeCodigo> ::= <repeatUntil> "/n" <lineaDeCodigo>
+42. <lineaDeCodigo> ::= <switch> "/n" <lineaDeCodigo>
+43. <lineaDeCodigo> ::= <asignaValue> " ./n" <lineaDeCodigo>
+44. <lineaDeCodigo> ::= <asignaValue> 
+45. <lineaDeCodigo> ::= "neco" " ./n" <lineaDeCodigo>
+46. <lineaDeCodigo> ::= "pergo" " ./n" <lineaDeCodigo>
+47. <lineaDeCodigo> ::= "claudeo" " ./n" <lineaDeCodigo>
+48. <lineaDeCodigo> ::= epsilon
 
-. <infija> ::= id <instruccion> id
-. <infija> ::= id <instruccion> valor
-. <infija> ::= valor <instruccion> id
-. <infija> ::= valor <instruccion> valor
+49. <prefija> ::= <operacion> id
 
-. <llamarRutina> ::= id "("<parametro>") ."
+50. <infija> ::= id <operacion> id
+51. <infija> ::= id <operacion> value
+52. <infija> ::= value <operacion> id
+53. <infija> ::= value <operacion> value
 
-. <parametro> ::= id ", " <parametro>
-. <parametro> ::= value ", " <parametro>
-. <parametro> ::= value
-. <parametro> ::= id
+54. <llamarRutina> ::= id "("<parametro>") ."
 
-. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
+55. <parametro> ::= id ", " <parametro>
+56. <parametro> ::= value ", " <parametro>
+57. <parametro> ::= value
+58. <parametro> ::= id
 
-. <while> ::=
+58. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
 
-. <for> ::=
+59. <while> ::= "tempus" <lineaDeCodigo> "opus"  " ./n" <bloqueDeCodigo>
 
-. <with> ::= 
+60. <for> ::= " panis " <lineaDeCodigo> " auctum " val " gradus " val " opus" " ./n" <bloqueDeCodigo>
 
-. <tipo> ::= "numerus"
-. <tipo> ::= "imago"
-. <tipo> ::= "catena"
-. <tipo> ::= "dualis"
-. <tipo> ::= "statuo"
-. <tipo> ::= "liber"
-. <tipo> ::= "ordo" [int] [int] "autem" <tipo>
-. <tipo> ::= "conjugo" <declaraConjugo> "dixi"
-. <tipo> ::= id
+61. <with> ::= "sigla" id "opus" " ./n" <bloqueDeCodigo> " ./n dixi"
 
-. <declaraConjugo> ::= <tipo> id "./n" <declaraConjugo>
-. <declaraConjugo> ::= epsilon
+62. <repeatUntil> ::= "itero" "/n" <bloqueDeCodigo> "usque" <lineaDeCodigo> "."
 
+63. <switch> ::= "aeger" id "/n initum" <switchCase> "finis ."
 
+64. <switchCase> ::= "casus" val "opus" <lineaDeCodigo> " neco ."
+65. <switchCase> ::= "detrimentum " <lineaDeCodigo> " neco ."
 
-. <entrada> ::= firmamentum
+66. <tipo> ::= "numerus"
+67. <tipo> ::= "imago"
+68. <tipo> ::= "catena"
+69. <tipo> ::= "dualis"
+70. <tipo> ::= "statuo"
+71. <tipo> ::= "liber"
+72. <tipo> ::= "ordo" [int] [int] "autem" <tipo>
+73. <tipo> ::= "conjugo" <declaraConjugo> "dixi"
+74. <tipo> ::= id
+
+75. <operacion> ::= "<"
+76. <operacion> ::= ">"
+77. <operacion> ::= "="
+78. <operacion> ::= ">="
+79. <operacion> ::= "<="
+80. <operacion> ::= "><"
+81. <operacion> ::= "[>>]"
+82. <operacion> ::= "[<<]"
+83. <operacion> ::= "[&?]"
+84. <operacion> ::= "[#?]"
+85. <operacion> ::= "$+"
+86. <operacion> ::= "$#"
+87. <operacion> ::= "x$"val"|>"val
+88. <operacion> ::= "x$"val"|<"val
+89. <operacion> ::= "X$?"val
+90. <operacion> ::= "+"
+91. <operacion> ::= "-"
+92. <operacion> ::= "*"
+93. <operacion> ::= "%"
+94. <operacion> ::= "/"
+95. <operacion> ::= ":="
+96. <operacion> ::= "+="
+97. <operacion> ::= "*="
+98. <operacion> ::= "%="
+99. <operacion> ::= "/="
+100. <operacion> ::= "incrementum"
+101. <operacion> ::= "decrementum"
+
+102. <asignaValue> ::= id " ::= " value
+
+103. <value> ::= val
+104. <value> ::= id
+105. <value> ::= <arreglo>
+106. <value> ::= <conjunto>
+107. <value> ::= <registro>
+108. <value> ::= <llamarRutina>
+
+109. <arreglo> ::=
+
+110. <conjunto> ::= 
+
+111. <registro> ::= 
+
+112. <entrada> ::=  "firmamentum" " ./n" <bloqueDeCodigo>
