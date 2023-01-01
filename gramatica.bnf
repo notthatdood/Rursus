@@ -1,0 +1,89 @@
+"
+TODO: 
+- revisar el 'valor' que usé, creo que hay que cambiarlo para que pueda tomar mas valores
+- revisar que se puedad eclarar un arreglo y un registro correctamente
+"
+
+
+"
+Cosas generales
+- Estoy usando id para simbolizar cualquier identificador
+- Estoy usando int para simbolizar cualquier entero
+"
+
+
+
+
+0. <S> ::= "nomen " id " ./n" <seccion>
+
+"Para las secciones, pongo el nombre, cambio de línea y luego el contenido"
+1. <seccion> ::= perpetuus " /n" <declaraConstante>
+2. <seccion> ::= furibundus " /n" <declaraTipo>
+3. <seccion> ::= commutabilis " /n" <declaraVariable>
+4. <seccion> ::= exemplar " /n" <declaraPrototipo>
+5. <seccion> ::= corpus " /n" <declaraRutina>
+6. <seccion> ::= <entrada>
+7. <seccion> ::= epsilon
+
+8. <declaraConstante> ::= id "dito " valor " ./n" <declaraConstante>
+9. <declaraConstante> ::= <seccion> " /n"
+
+10. <declaraTipo> ::= id "sum " valor " ./n" <declaraTipo>
+11. <declaraTipo> ::= <seccion> " /n"
+
+12. <declaraVariable> ::= <tipo> id " est " valor " ./n" <declaraVariable>
+13. <declaraVariable> ::= <tipo> id " est " valor ", " <declaraVariable>
+14. <declaraVariable> :: id " est " valor ", " <declaraVariable>
+15. <declaraVariable> :: id " est " valor " ./n" <declaraVariable>
+16. <declaraVariable> :: <seccion> "/n"
+
+17. <declaraPrototipo> ::= <seccion> "/n"
+
+18. <declaraRutina> ::= "directus" id "(" <declaraParametro> ")"  " ./n" <seccionDeCodigo>
+19. <declaraRutina> ::= "directus" id "(" <declaraParametro> ") : " <tipo> " ./n" <seccionDeCodigo>
+20. <declaraRutina> ::= epsilon
+
+21. <declaraParametro> ::= <tipo> id " ." <declaraParametro> 
+22. <declaraParametro>  ::= <tipo> id ", "<declaraParametro> 
+23. <declaraParametro>  ::= <tipo> id 
+24. <declaraParametro>  ::= id <declaraParametro> ", "
+25. <declaraParametro>  ::= id <declaraParametro> " ."
+26. <declaraParametro>  ::= id <declaraParametro> 
+
+. <seccionDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ."
+
+
+. <lineaDeCodigo> ::= <prefija> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <infija> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <llamarRutina> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <if> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <while> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <for> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <with> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= epsilon
+
+. <prefija> ::= <instruccion> id
+
+. <infija> ::= id <instruccion> id
+. <infija> ::= id <instruccion> valor
+. <infija> ::= valor <instruccion> id
+. <infija> ::= valor <instruccion> valor
+
+. <llamarRutina> ::= 
+
+. <tipo> ::= "numerus"
+. <tipo> ::= "imago"
+. <tipo> ::= "catena"
+. <tipo> ::= "dualis"
+. <tipo> ::= "statuo"
+. <tipo> ::= "liber"
+. <tipo> ::= "ordo" [int] [int] "autem" <tipo>
+. <tipo> ::= "conjugo" <declaraConjugo> "dixi"
+. <tipo> ::= id
+
+. <declaraConjugo> ::= <tipo> id "./n" <declaraConjugo>
+. <declaraConjugo> ::= epsilon
+
+
+
+. <entrada> ::= firmamentum
