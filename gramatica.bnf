@@ -2,13 +2,19 @@
 TODO: 
 - revisar el 'valor' que usé, creo que hay que cambiarlo para que pueda tomar mas valores
 - revisar que se puedad eclarar un arreglo y un registro correctamente
+- definir condicionales y bucles
+- permitir que los bloques de if no requieran initum y finis
+- falta poder hacer R:= 1 .
+- value o id debe poder ser una función
 "
 
 
 "
 Cosas generales
-- Estoy usando id para simbolizar cualquier identificador
-- Estoy usando int para simbolizar cualquier entero
+- Estoy usando 'id' para simbolizar cualquier identificador
+- Estoy usando 'int' para simbolizar cualquier entero
+- Estoy usando '/n' para simbolizar el cambio de línea
+
 "
 
 
@@ -39,8 +45,8 @@ Cosas generales
 
 17. <declaraPrototipo> ::= <seccion> "/n"
 
-18. <declaraRutina> ::= "directus" id "(" <declaraParametro> ")"  " ./n" <seccionDeCodigo>
-19. <declaraRutina> ::= "directus" id "(" <declaraParametro> ") : " <tipo> " ./n" <seccionDeCodigo>
+18. <declaraRutina> ::= "directus" id "(" <declaraParametro> ")"  " ./n" <bloqueDeCodigo>
+19. <declaraRutina> ::= "directus" id "(" <declaraParametro> ") : " <tipo> " ./n" <bloqueDeCodigo>
 20. <declaraRutina> ::= epsilon
 
 21. <declaraParametro> ::= <tipo> id " ." <declaraParametro> 
@@ -50,8 +56,7 @@ Cosas generales
 25. <declaraParametro>  ::= id <declaraParametro> " ."
 26. <declaraParametro>  ::= id <declaraParametro> 
 
-. <seccionDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ."
-
+. <bloqueDeCodigo> ::= "initum" <lineaDeCodigo> "/n" "finis ."
 
 . <lineaDeCodigo> ::= <prefija> "/n" <lineaDeCodigo>
 . <lineaDeCodigo> ::= <infija> "/n" <lineaDeCodigo>
@@ -60,6 +65,7 @@ Cosas generales
 . <lineaDeCodigo> ::= <while> "/n" <lineaDeCodigo>
 . <lineaDeCodigo> ::= <for> "/n" <lineaDeCodigo>
 . <lineaDeCodigo> ::= <with> "/n" <lineaDeCodigo>
+. <lineaDeCodigo> ::= <bloqueDeCodigo> "/n" <lineaDeCodigo>
 . <lineaDeCodigo> ::= epsilon
 
 . <prefija> ::= <instruccion> id
@@ -69,7 +75,20 @@ Cosas generales
 . <infija> ::= valor <instruccion> id
 . <infija> ::= valor <instruccion> valor
 
-. <llamarRutina> ::= 
+. <llamarRutina> ::= id "("<parametro>") ."
+
+. <parametro> ::= id ", " <parametro>
+. <parametro> ::= value ", " <parametro>
+. <parametro> ::= value
+. <parametro> ::= id
+
+. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
+
+. <while> ::=
+
+. <for> ::=
+
+. <with> ::= 
 
 . <tipo> ::= "numerus"
 . <tipo> ::= "imago"
