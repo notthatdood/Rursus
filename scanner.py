@@ -56,7 +56,7 @@ def checkStrings(pTokenList, pTokenPos):
         pTokenList[pTokenPos] = '"'
 
         while pTokenList[nextTokenPos] != "''":
-            print(pTokenList[nextTokenPos])
+            #print(pTokenList[nextTokenPos])
             pTokenList[pTokenPos] += pTokenList[nextTokenPos]
             if pTokenList[nextTokenPos+1] != "''":
                 pTokenList[pTokenPos] += " "
@@ -147,8 +147,6 @@ def cleanTokens(pTokenList):
     result=False
     tokenPos=0
     while (tokenPos < len(pTokenList)):
-        if (pTokenList[tokenPos]=='1'):
-            print("va el 1")
         result=False
         #Checks for strings
         [pTokenList,result] = checkStrings(pTokenList,tokenPos)
