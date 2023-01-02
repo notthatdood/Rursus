@@ -2,6 +2,8 @@
 # - https://java2blog.com/python-read-file-into-string/
 # - https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch06s01.html
 # - https://stackoverflow.com/questions/9519734/python-regex-to-find-a-string-in-double-quotes-within-a-string
+# - https://www.digitalocean.com/community/tutorials/python-string-contains
+# - https://stackoverflow.com/questions/10047110/is-it-possible-to-pass-arguments-to-a-python-made-exe-at-runtime
 
 import nltk
 import re

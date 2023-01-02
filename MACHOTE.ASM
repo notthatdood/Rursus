@@ -3,6 +3,7 @@
 datos segment
 
     Base dw 10
+    len dw 0
 
 datos endS
 
