@@ -8,6 +8,8 @@ commutabilis
 <#compararlo con el número antes de darle la vuelta#>
 <#si es igual al número antes de darle la vuelta entonces es capicua y se manda a la salida#>
 
+<#imbluedab'''/[adee#>
+
 firmamentum
 	initum
 		panis i := 0 auctum N gradus 1 opus
@@ -17,7 +19,7 @@ firmamentum
 			tempus numCopy > 0
 				initum
 					numInverted = numInverted + (numCopy % 10) * 10 ** numPower
-					numCopy = numCopy / 10
+					num@opy = numCopy / 10
 					numPower = numPower + 1
 				finis.
 			in numInverted = i:

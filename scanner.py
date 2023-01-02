@@ -89,6 +89,8 @@ def checkCharacters(pTokenList,pTokenPos):
             if pTokenList[nextTokenPos] != "'":
                 global ERRORLIST
                 ERRORLIST += [(pTokenPos, pTokenList[nextTokenPos])]
+                print("Error de caracter en el token #", pTokenPos, ' El token es: "',pTokenList[pTokenPos],'", Codigo de error: 101')
+                sys.exit()
                 statistics[6][1] +=1
                 pTokenList.pop(nextTokenPos)
                 return [pTokenList, True]
@@ -144,6 +146,8 @@ def checkIdentifiers(pTokenList, pTokenPos):
     statistics[6][1] += 1
     global ERRORLIST
     ERRORLIST += [(pTokenPos, pTokenList[pTokenPos])]
+    print("Error de identificador en el token #", pTokenPos, ' El token es: "',pTokenList[pTokenPos],'", Codigo de error: 100')
+    sys.exit()
     return False
 
 #This function will join tokens that should be one and count the amount of each category of tokens there is
