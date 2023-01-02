@@ -91,9 +91,9 @@ Cosas generales
 57. <parametro> ::= <value>
 58. <parametro> ::= id
 
-59. <while> ::= "tempus" <lineaDeCodigo> "opus"  " ./n" <bloqueDeCodigo>
+59. <while> ::= "tempus" <lineaDeCodigo> "opus"  " /n" <bloqueDeCodigo> " ./n"
 
-60. <for> ::= " panis " <lineaDeCodigo> " auctum " val " gradus " val " opus" " ./n" <bloqueDeCodigo>
+60. <for> ::= " panis " <lineaDeCodigo> " auctum " val " gradus " val " opus" " /n" <bloqueDeCodigo> " ./n"
 
 61. <with> ::= "sigla" id "opus" " ./n" <bloqueDeCodigo> " ./n dixi"
 
@@ -110,7 +110,7 @@ Cosas generales
 69. <tipo> ::= "dualis"
 70. <tipo> ::= "statuo"
 71. <tipo> ::= "liber"
-72. <tipo> ::= "ordo" [int] [int] "autem" <tipo>
+72. <tipo> ::= "ordo" "["int"]" "["int"]" "autem" <tipo>
 73. <tipo> ::= "conjugo" <declaraConjugo> "dixi"
 74. <tipo> ::= id
 
@@ -157,7 +157,6 @@ Cosas generales
 
 111. <registro> ::= 
 "El if lo puse acá abajo porque me equivoqué en la enumeración y no quise corregir los 60 que tenía debajo"
-112. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
-
+112. <if> ::= "in" <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
 
 113. <entrada> ::=  "firmamentum" " ./n" <bloqueDeCodigo>
