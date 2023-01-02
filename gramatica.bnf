@@ -26,16 +26,16 @@ Cosas generales
 7. <seccion> ::= epsilon
 
 "Aquí van todas las declaraciones. "
-8. <declaraConstante> ::= id "dito " value " ./n" <declaraConstante>
+8. <declaraConstante> ::= id "dito " <value> " ./n" <declaraConstante>
 9. <declaraConstante> ::= <seccion> " /n"
 
-10. <declaraTipo> ::= id "sum " value " ./n" <declaraTipo>
+10. <declaraTipo> ::= id "sum " <value> " ./n" <declaraTipo>
 11. <declaraTipo> ::= <seccion> " /n"
 
-12. <declaraVariable> ::= <tipo> id " est " value " ./n" <declaraVariable>
-13. <declaraVariable> ::= <tipo> id " est " value ", " <declaraVariable>
-14. <declaraVariable> :: id " est " value ", " <declaraVariable>
-15. <declaraVariable> :: id " est " value " ./n" <declaraVariable>
+12. <declaraVariable> ::= <tipo> id " est " <value> " ./n" <declaraVariable>
+13. <declaraVariable> ::= <tipo> id " est " <value> ", " <declaraVariable>
+14. <declaraVariable> :: id " est " <value> ", " <declaraVariable>
+15. <declaraVariable> :: id " est " <value> " ./n" <declaraVariable>
 16. <declaraVariable> :: <seccion> "/n"
 
 17. <declaraPrototipo> ::= <seccion> "/n"
@@ -80,15 +80,15 @@ Cosas generales
 49. <prefija> ::= <operacion> id
 
 50. <infija> ::= id <operacion> id
-51. <infija> ::= id <operacion> value
-52. <infija> ::= value <operacion> id
-53. <infija> ::= value <operacion> value
+51. <infija> ::= id <operacion> <value>
+52. <infija> ::= <value> <operacion> id
+53. <infija> ::= <value> <operacion> <value>
 
 54. <llamarRutina> ::= id "("<parametro>") ."
 
 55. <parametro> ::= id ", " <parametro>
-56. <parametro> ::= value ", " <parametro>
-57. <parametro> ::= value
+56. <parametro> ::= <value> ", " <parametro>
+57. <parametro> ::= <value>
 58. <parametro> ::= id
 
 58. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
@@ -144,7 +144,7 @@ Cosas generales
 100. <operacion> ::= "incrementum"
 101. <operacion> ::= "decrementum"
 
-102. <asignaValue> ::= id " ::= " value
+102. <asignaValue> ::= id " ::= " <value>
 
 103. <value> ::= val
 104. <value> ::= id
