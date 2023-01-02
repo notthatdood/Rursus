@@ -17,16 +17,17 @@ import sys
 #- It also modifies the content of strings by deleting spaces, newlines, etc. It assumes there is a single space between all tokens.
 
 #incrementum y decrementum las categoricé como palabras reservadas
-OPERATIONS=[ "<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", r'[*]$[*]\|\>[*]', r'[*]$[*]|<[*]', r'[*]$\?[*]', 
-            "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:"]
+OPERATIONS = [ "<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", r'[*]$[*]\|\>[*]', r'[*]$[*]|<[*]', r'[*]$\?[*]', 
+            "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
+            "patentibus", "prope", "scripturam", "lectio", "partum", "ligo"]
 
-RESERVED=["incrementum", "decrementum", "numerus", "imago", "catena", "dualis", "statuo", "liber", "ordo", "autem", 
+RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis", "statuo", "liber", "ordo", "autem", 
             "conjugo", "dixi", "firmamentum", "detrimentum", "casus", "neco", "finis", "aeger", "initum", "opus", 
             "dixi", "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo", 
             "claudeo", "directus", "est", "sum", "dito", "nomen", "perpetuus", "furibundus", "commutabilis", "exemplar", 
             "corpus", "in","\.", "\,", "\(","\)","\[","\]","\{","\}"]
 
-INTEGERS=r'[\+\-]?\b[0-9]+\b'
+INTEGERS = r'[\+\-]?\b[0-9]+\b'
 
 IDENTIFIERS = "[\w\-]+"
 
