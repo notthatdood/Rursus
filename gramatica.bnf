@@ -46,11 +46,11 @@ Cosas generales
 20. <declaraRutina> ::= epsilon
 
 21. <declaraParametro> ::= <tipo> id " ." <declaraParametro> 
-22. <declaraParametro>  ::= <tipo> id ", "<declaraParametro> 
-23. <declaraParametro>  ::= <tipo> id 
-24. <declaraParametro>  ::= id <declaraParametro> ", "
-25. <declaraParametro>  ::= id <declaraParametro> " ."
-26. <declaraParametro>  ::= id <declaraParametro> 
+22. <declaraParametro> ::= <tipo> id ", "<declaraParametro> 
+23. <declaraParametro> ::= <tipo> id 
+24. <declaraParametro> ::= id <declaraParametro> " ."
+25. <declaraParametro> ::= id <declaraParametro> ", "
+26. <declaraParametro> ::= id <declaraParametro> 
 
 27. <declaraConjugo> ::= <tipo> id " ./n" <declaraConjugo>
 28. <declaraConjugo> ::= epsilon
@@ -90,8 +90,6 @@ Cosas generales
 56. <parametro> ::= <value> ", " <parametro>
 57. <parametro> ::= <value>
 58. <parametro> ::= id
-
-58. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
 
 59. <while> ::= "tempus" <lineaDeCodigo> "opus"  " ./n" <bloqueDeCodigo>
 
@@ -158,5 +156,8 @@ Cosas generales
 110. <conjunto> ::= 
 
 111. <registro> ::= 
+"El if lo puse acá abajo porque me equivoqué en la enumeración y no quise corregir los 60 que tenía debajo"
+112. <if> ::= in <lineaDeCodigo> "/n certus /n" <bloqueDeCodigo> "./n mentiri /n" <bloqueDeCodigo>". /n ." 
 
-112. <entrada> ::=  "firmamentum" " ./n" <bloqueDeCodigo>
+
+113. <entrada> ::=  "firmamentum" " ./n" <bloqueDeCodigo>
