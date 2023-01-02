@@ -3,7 +3,7 @@
 # - https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch06s01.html
 # - https://stackoverflow.com/questions/9519734/python-regex-to-find-a-string-in-double-quotes-within-a-string
 # - https://www.digitalocean.com/community/tutorials/python-string-contains
-# - https://stackoverflow.com/questions/10047110/is-it-possible-to-pass-arguments-to-a-python-made-exe-at-runtime
+# - https://datatofish.com/executable-pyinstaller/
 
 import nltk
 import re
@@ -225,6 +225,8 @@ if __name__ == "__main__":
 
         print(tokenList)
         print("numero de tokens luego de limpieza: ", len(tokenList))
-        print("Estadisticas: ", statistics)
+        for statistic in statistics:
+            if (statistic[1] != 0):
+                print(statistic)
 
         print(ERRORLIST)
