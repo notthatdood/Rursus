@@ -17,11 +17,11 @@ Cosas generales
 0. <S> ::= "nomen " id " ./n" <seccion>
 
 "Para las secciones, pongo el nombre, cambio de línea y luego el contenido"
-1. <seccion> ::= perpetuus " /n" <declaraConstante>
-2. <seccion> ::= furibundus " /n" <declaraTipo>
-3. <seccion> ::= commutabilis " /n" <declaraVariable>
-4. <seccion> ::= exemplar " /n" <declaraPrototipo>
-5. <seccion> ::= corpus " /n" <declaraRutina>
+1. <seccion> ::= "perpetuus" " /n" <declaraConstante>
+2. <seccion> ::= "furibundus" " /n" <declaraTipo>
+3. <seccion> ::= "commutabilis" " /n" <declaraVariable>
+4. <seccion> ::= "exemplar" " /n" <declaraPrototipo>
+5. <seccion> ::= "corpus" " /n" <declaraRutina>
 6. <seccion> ::= <entrada>
 7. <seccion> ::= epsilon
 
