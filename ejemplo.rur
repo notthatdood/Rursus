@@ -1,5 +1,5 @@
 nomen EJEMPLO .
-
+<#este es un ejemplo hecho por el profe que modifiqué un pelo#>
 perpetuus   <#  Abre la sección de constantes #>
     A dito 45 .
     B dito 'K' . 
@@ -47,6 +47,6 @@ firmamentum  <#  Punto de entrada del programa #>
             in B > C mentiri
                 B := 1 .
             certus
-                B := 8. .
+                B := 8 . .
        finis .
     finis .

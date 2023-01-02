@@ -5,6 +5,7 @@
 
 import nltk
 import re
+import sys
 
 
 #TODO:
@@ -38,7 +39,8 @@ def removeComments(pTokenList):
     for i in range(0,len(pTokenList)-2):
         if pTokenList[i]=="<" and pTokenList[i+1]=="#":
             commenting = True
-        elif pTokenList[i]=="#" and pTokenList[i+1]==">":
+        elif pTokenList[i-1]=="#" and pTokenList[i]==">":
+            #i+=2
             commenting = False
         else:
             if not commenting:
@@ -190,8 +192,8 @@ def cleanTokens(pTokenList):
     return pTokenList
 
 
-
-with open('ejemploDelProfe.rur','r') as file:
+#para correr sin convertir a .exe
+"""with open('ejemplo.rur','r') as file:
     script = file.read()
 
 tokenList = nltk.word_tokenize(script)
@@ -205,5 +207,22 @@ print(tokenList)
 print("numero de tokens luego de limpieza: ", len(tokenList))
 print("Estadisticas: ", statistics)
 
-print(ERRORLIST)
-#print(re.findall(INTEGERS, '88'))
+print(ERRORLIST)"""
+
+if __name__ == "__main__":
+    if len(sys.argv)>1:
+        with open(sys.argv[1],'r') as file:
+            script = file.read()
+
+        tokenList = nltk.word_tokenize(script)
+
+        tokenList = removeComments(tokenList)
+        print("numero de tokens sin comments: ", len(tokenList))
+
+        tokenList = cleanTokens(tokenList)
+
+        print(tokenList)
+        print("numero de tokens luego de limpieza: ", len(tokenList))
+        print("Estadisticas: ", statistics)
+
+        print(ERRORLIST)
