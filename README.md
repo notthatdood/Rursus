@@ -1,6 +1,11 @@
 # Rursus
-Este proyecto se desarrolló para el curso de Compiladores e Intérpretes
+This project was developed for a college course named: Compiladores e Intérpretes
 
-En scanner.py se debe descomentar lo que dice "para correr sin convertir a .exe"
+It is a compiler for the programming language RursuS
 
-Si se quiere hacer en un ejecutable que reciba de parámetro el archivo a escanear, descomentar la otra parte del final.
+
+
+Usage Instructions
+To use the scanner currently, uncomment the section that says "para correr sin convertir a .exe" on top. Then when ran, the script will receive one parameter it assumes to be the name of the file.
+
+If you want to turn it into an executable, first uncomment the section below the one mentioned before. Then convert it into an executable. And then when executed it will receive one parameter it assumes to be the name of the file.
