@@ -1,0 +1,33 @@
+<#se declara N como constante#>
+perpetuus
+    N dito 17.
+
+<#se declara una variable auxiliar para determinar si fue dividido o no un número#>
+commutabilis
+	dualis fueDividido est falsidicus.
+	
+<#este algoritmo definitivamente no es el más eficiente pero debería funcionar simplemente voy a dividir cada número menor a N por#>
+<#cada número menor a él mismo. Si no es divisible por ninguno se enviará a la salida#>
+<#Se podría mejorar de muchas maneras, una sencilla sería solo dividir por números que ya se determinaran primos#>
+firmamentum
+	initum
+		scribonumerus(1).
+		panis i := 2 auctum N gradus 1 opus
+			panis j := 2 auctum i-1 gradus 1 opus
+				in i%j=0
+					certus
+						fueDividido est veridicus.
+						neco.
+					mentiri
+						fueDividido est falsidicus.
+				.
+			.
+			in fueDividido
+				certus
+					fueDividido est falsidicus.
+					pergo.
+				mentiri
+					scribonumerus(i).				
+			.
+		.
+	finis.

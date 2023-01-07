@@ -5,21 +5,22 @@
 # - https://www.digitalocean.com/community/tutorials/python-string-contains
 # - https://datatofish.com/executable-pyinstaller/
 
-import nltk
 import re
 import sys
+import Token
 
 
 #TODO:
-#- Further verification for strings and char is necessary
 #- Must further separate punctuation after using the word_tokenize() method. Currently there must be spaces between characters and punctuation so they are separated in some cases
 #   this additional processing must be done at the start
-#- It also modifies the content of strings by deleting spaces, newlines, etc. It assumes there is a single space between all tokens.
+
+#OBSERVATIONS
+#- Doing it this way modifies the content of strings by deleting spaces, newlines, etc. It assumes there is a single space between all tokens.
 
 #incrementum y decrementum las categoricé como palabras reservadas
 OPERATIONS = [ "<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", r'[*]$[*]\|\>[*]', r'[*]$[*]|<[*]', r'[*]$\?[*]', 
             "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
-            "patentibus", "prope", "scripturam", "lectio", "partum", "ligo"]
+            "patentibus", "prope", "scripturam", "lectio", "partum", "ligo", ">>", "<<"]
 
 RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis", "statuo", "liber", "ordo", "autem", 
             "conjugo", "dixi", "firmamentum", "detrimentum", "casus", "neco", "finis", "aeger", "initum", "opus", 
@@ -27,11 +28,17 @@ RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis"
             "claudeo", "directus", "est", "sum", "dito", "nomen", "perpetuus", "furibundus", "commutabilis", "exemplar", 
             "corpus", "in","\.", "\,", "\(","\)","\[","\]","\{","\}"]
 
-INTEGERS = r'[\+\-]?\b[0-9]+\b'
+INTEGERS = r'[\-]?\b[0-9]+\b' #Family 0
 
-IDENTIFIERS = "[\w\-]+"
+IDENTIFIERS = "[\w\-]+" #Family 1
+
+#Characters will be family 2
+
+#Strings will be family 3
 
 ERRORLIST = []
+
+tokenObjects = []
 
 statistics = [["OPERATIONS",0],["RESERVED",0],["INTEGERS",0],["IDS",0],["STRINGS",0], ["CHARACTERS",0], ["ERRORS",0]]
 
@@ -201,31 +208,31 @@ def cleanTokens(pTokenList):
 
 #para correr sin convertir a .exe
 """
-with open('ejemplo.rur','r') as file:
+with open('prueba3.rur','r') as file:
     script = file.read()
 
-tokenList = nltk.word_tokenize(script)
+tokenList = word_tokenize(script)
 
 tokenList = removeComments(tokenList)
 print("numero de tokens sin comments: ", len(tokenList))
 
 tokenList = cleanTokens(tokenList)
-
 print(tokenList)
+
 print("numero de tokens luego de limpieza: ", len(tokenList))
 print("Estadisticas: ", statistics)
 
 print(ERRORLIST)
 """
 
-
+#para convertir a .exe
 """
 if __name__ == "__main__":
     if len(sys.argv)>1:
         with open(sys.argv[1],'r') as file:
             script = file.read()
 
-        tokenList = nltk.word_tokenize(script)
+        tokenList = word_tokenize(script)
 
         tokenList = removeComments(tokenList)
         print("numero de tokens sin comments: ", len(tokenList))
