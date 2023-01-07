@@ -1,8 +1,6 @@
 import Scanner
 from nltk import word_tokenize
 
-
-
 #When running file without converting to .exe
 with open('prueba3.rur','r') as file:
     script = file.read()
