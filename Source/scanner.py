@@ -46,7 +46,7 @@ statistics = [["OPERATIONS",0],["RESERVED",0],["INTEGERS",0],["IDS",0],["STRINGS
 def removeComments(pTokenList):
     resultTokenList = []
     commenting = False
-    for i in range(0,len(pTokenList)-2):
+    for i in range(0,len(pTokenList)):
         if pTokenList[i]=="<" and pTokenList[i+1]=="#":
             commenting = True
         elif pTokenList[i-1]=="#" and pTokenList[i]==">":
@@ -56,6 +56,10 @@ def removeComments(pTokenList):
             if not commenting:
                 resultTokenList+=[pTokenList[i]]
     return resultTokenList
+
+def separateDots(pTokenList):
+    resultTokenList = []
+    
 
 
 
@@ -120,7 +124,7 @@ def checkReserved(pToken):
         exResult = re.findall(RESERVED[i], pToken, re.IGNORECASE)
         if len(exResult)==1:
             statistics[1][1] += 1
-            TOKENOBJECTLIST += [RursusToken(pToken, i+44, "Reserved")]
+            TOKENOBJECTLIST += [RursusToken(pToken, i+len(OPERATIONS) + 4, "Reserved")]
             return True
     return False
 

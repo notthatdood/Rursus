@@ -17,12 +17,13 @@ firmamentum
 			numCopy est i .
 			numInverted est 0 .
 			numPower est 0 .
-			tempus numCopy > 0 .
+			tempus numCopy > 0 
 				initum
 					numInverted = numInverted + (numCopy % 10) * 10 ** numPower .
+					<#it should be numCopy, the @ symbol is for testing#>
 					num@opy = numCopy / 10 .
 					numPower = numPower + 1 .
-				finis.
+				finis .
 			in numInverted = i:
 				certus 
 					scribonumerus(i).
@@ -30,4 +31,4 @@ firmamentum
 					pergo .
 			.
 		.
-	finis.
+	finis .
