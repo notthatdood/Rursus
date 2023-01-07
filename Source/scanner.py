@@ -7,7 +7,7 @@
 
 import re
 import sys
-import Token
+from RursusToken import RursusToken
 
 
 #TODO:
@@ -38,7 +38,7 @@ IDENTIFIERS = "[\w\-]+" #Family 1
 
 ERRORLIST = []
 
-tokenObjects = []
+TOKENOBJECTLIST = []
 
 statistics = [["OPERATIONS",0],["RESERVED",0],["INTEGERS",0],["IDS",0],["STRINGS",0], ["CHARACTERS",0], ["ERRORS",0]]
 
@@ -63,6 +63,7 @@ def removeComments(pTokenList):
 
 #This function will join elements that belong to the same string
 def checkStrings(pTokenList, pTokenPos):
+    global TOKENOBJECTLIST
     nextTokenPos=pTokenPos + 1
     if pTokenList[pTokenPos]=='``':
         pTokenList[pTokenPos] = '"'
@@ -77,12 +78,14 @@ def checkStrings(pTokenList, pTokenPos):
         pTokenList.pop(nextTokenPos)
         pTokenList[pTokenPos] += '"'
         statistics[4][1] += 1
+        TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos], 3, "Str")]
         return [pTokenList, True]
 
     return [pTokenList, False]
 
 #This function will join elements that belong to the same character
 def checkCharacters(pTokenList,pTokenPos):
+    global TOKENOBJECTLIST
     nextTokenPos=pTokenPos + 1
 
     if pTokenList[pTokenPos] == "'":
@@ -98,37 +101,44 @@ def checkCharacters(pTokenList,pTokenPos):
                 ERRORLIST += [(pTokenPos, pTokenList[nextTokenPos])]
                 print("Error de caracter en el token #", pTokenPos, ' El token es: "',pTokenList[pTokenPos],'", Codigo de error: 101')
                 sys.exit()
-                statistics[6][1] +=1
-                pTokenList.pop(nextTokenPos)
-                return [pTokenList, True]
+                #statistics[6][1] +=1
+                #pTokenList.pop(nextTokenPos)
+                #return [pTokenList, True]
 
             pTokenList.pop(nextTokenPos)
         statistics[5][1] +=1
+        TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos], 2, "Char")]
         return [pTokenList, True]
         
     return [pTokenList, False]
 
 #This function will match the reserved words and count how many there are
 def checkReserved(pToken):
-    for regEx in RESERVED:
-        exResult = re.findall(regEx, pToken, re.IGNORECASE)
+    global TOKENOBJECTLIST
+    #for regEx in RESERVED:
+    for i in range(0, len(RESERVED)):
+        exResult = re.findall(RESERVED[i], pToken, re.IGNORECASE)
         if len(exResult)==1:
             statistics[1][1] += 1
+            TOKENOBJECTLIST += [RursusToken(pToken, i+44, "Reserved")]
             return True
     return False
 
 def checkOperations(pTokenList,pTokenPos):
+    global TOKENOBJECTLIST
     nextTokenPos = pTokenPos + 1
-    for regEx in OPERATIONS:
-        exResult1 = re.findall(regEx, pTokenList[pTokenPos], re.IGNORECASE)
+    #for regEx in OPERATIONS:
+    for i in range(0, len(OPERATIONS)):
+        exResult1 = re.findall(OPERATIONS[i], pTokenList[pTokenPos], re.IGNORECASE)
         if nextTokenPos < len(pTokenList):
-            exResult2 = re.findall(regEx, pTokenList[nextTokenPos], re.IGNORECASE)
+            exResult2 = re.findall(OPERATIONS[i], pTokenList[nextTokenPos], re.IGNORECASE)
         else:
             exResult2=[]
         if (len(exResult1)>0) and (len(exResult2)>0):
             pTokenList[pTokenPos] += pTokenList[nextTokenPos]
             pTokenList.pop(nextTokenPos)
             statistics[0][1] += 1
+            TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos], i+4, "Operation")]
             return [pTokenList, True]
 
         elif (len(exResult1)>0):
@@ -138,17 +148,21 @@ def checkOperations(pTokenList,pTokenPos):
     return [pTokenList, False]
 
 def checkIntegers(pTokenList, pTokenPos):
+    global TOKENOBJECTLIST
     exResult = re.findall(INTEGERS, pTokenList[pTokenPos])
     
     if len(exResult)>0:
         statistics[2][1] += 1
+        TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos], 0, "Int")]
         return True
     return False
 
 def checkIdentifiers(pTokenList, pTokenPos):
+    global TOKENOBJECTLIST
     exResult = re.findall(IDENTIFIERS, pTokenList[pTokenPos], re.IGNORECASE)
     if (len(exResult)>0):
         statistics[3][1] += 1
+        TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos], 1, "Id")]
         return True
     statistics[6][1] += 1
     global ERRORLIST

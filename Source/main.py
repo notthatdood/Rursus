@@ -18,6 +18,8 @@ print(tokenList)
 print("numero de tokens luego de limpieza: ", len(tokenList))
 print("Estadisticas: ", Scanner.statistics)
 
+for i in Scanner.TOKENOBJECTLIST:
+    print(i.content +" | "+ i.type)
 
 #When converting file to .exe
 """

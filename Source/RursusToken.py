@@ -1,7 +1,7 @@
-class Token:
-    content = ''
+class RursusToken:
+    content = ""
     family = 0
-    type = ''
+    type = ""
     def __init__(self, pContent, pFamily, pType):
         self.content=pContent
         self.family= pFamily
