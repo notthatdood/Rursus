@@ -15,10 +15,10 @@ with open('Source/RursusTestPrograms/prueba3.rur','r') as file:
 script += "\nEOF"
 
 tokenList = word_tokenize(script)
-print("numero de tokens con comments: ", len(tokenList))
+print("Total tokens with comments: ", len(tokenList))
 
 tokenList = Scanner.removeComments(tokenList)
-print("numero de tokens sin comments: ", len(tokenList))
+print("Total tokens without comments: ", len(tokenList))
 
 tokenList = Scanner.cleanTokens(tokenList)
 

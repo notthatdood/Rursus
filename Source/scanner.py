@@ -18,7 +18,7 @@ from RursusToken import RursusToken
 #- Doing it this way modifies the content of strings by deleting spaces, newlines, etc. It assumes there is a single space between all tokens.
 
 #incrementum y decrementum las categoricé como palabras reservadas
-OPERATIONS = [ "<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", r'[*]$[*]\|\>[*]', r'[*]$[*]|<[*]', r'[*]$\?[*]', 
+OPERATIONS = [ "<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", r'[*]$[*]\|\>[*]', r'[*]$[*]\|\<[*]', r'[*]$\?[*]', 
             "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
             "patentibus", "prope", "scripturam", "lectio", "partum", "ligo", ">>", "<<"]
 
