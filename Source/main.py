@@ -1,4 +1,6 @@
 import Scanner
+import Parser
+import parseParsingTable
 from nltk import word_tokenize
 
 def printTokens():
@@ -11,8 +13,6 @@ def printTokens():
 #When running file without converting to .exe
 with open('Source/RursusTestPrograms/prueba3.rur','r') as file:
     script = file.read()
-
-script += "\nEOF"
 
 tokenList = word_tokenize(script)
 print("Total tokens with comments: ", len(tokenList))
@@ -28,6 +28,12 @@ print("Estadisticas: ", Scanner.statistics)
 
 printTokens()
 
+
+parsingTable = parseParsingTable.getParsingTable("Source\GTablaParsing.java")
+
+for i in range(0,len(parsingTable)):
+    parsingTable[i] = parsingTable[i].split(",")
+print(parsingTable)
 #When converting file to .exe
 """
 if __name__ == "__main__":
