@@ -28,7 +28,8 @@ RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis"
             "dixi", "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo", 
             "claudeo", "directus", "est", "sum", "dito", "nomen", "perpetuus", "furibundus", "commutabilis", "exemplar", 
             "corpus", "in","\.", "\,", "\(","\)","\[","\]","\{","\}"]
-print(len(RESERVED)+len(OPERATIONS)+4)
+#print("Total tokens", len(RESERVED)+len(OPERATIONS)+4)
+
 INTEGERS = r'[\-]?\b[0-9]+\b' #Family 0
 
 IDENTIFIERS = "[\w\-]+" #Family 1

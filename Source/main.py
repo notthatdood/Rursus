@@ -15,25 +15,35 @@ with open('Source/RursusTestPrograms/prueba3.rur','r') as file:
     script = file.read()
 
 tokenList = word_tokenize(script)
-print("Total tokens with comments: ", len(tokenList))
+
+#print("Total tokens with comments: ", len(tokenList))
 
 tokenList = Scanner.removeComments(tokenList)
-print("Total tokens without comments: ", len(tokenList))
+
+#print("Total tokens without comments: ", len(tokenList))
 
 tokenList = Scanner.cleanTokens(tokenList)
 
-#print(tokenList)
-print("numero de tokens luego de limpieza: ", len(tokenList))
-print("Estadisticas: ", Scanner.statistics)
+#Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
+#print("numero de tokens luego de limpieza: ", len(tokenList))
+#print("Estadisticas: ", Scanner.statistics)
 
-printTokens()
+#printTokens()
 
 
 parsingTable = parseParsingTable.getParsingTable("Source\GTablaParsing.java")
 
 for i in range(0,len(parsingTable)):
     parsingTable[i] = parsingTable[i].split(",")
+
 print(parsingTable)
+
+#####################################################
+
+
+
+
+
 #When converting file to .exe
 """
 if __name__ == "__main__":
