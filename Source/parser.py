@@ -26,14 +26,17 @@ def popToken():
 
 def checkTable():
     global ParsingTable, CurrentToken, Stack, Grammar, CurrentNonTerminal
+    print("currenttokenfam: ", CurrentToken.family)
+    print("currentnt: ", CurrentNonTerminal)
+    print("ptresult: ", ParsingTable[CurrentNonTerminal][CurrentToken.family])
+    ParsingTable[CurrentNonTerminal]
     CurrentNonTerminal = int(ParsingTable[CurrentNonTerminal][CurrentToken.family])
     if (CurrentNonTerminal != -1):
-        print("current nt number: ", ParsingTable[CurrentNonTerminal][CurrentToken.family])
+        print("current nt number: ", CurrentNonTerminal)
         #Here we add the rule's content to the Stack
         Stack = Grammar[CurrentNonTerminal] + Stack
         return True
     else:
-        print(ParsingTable[CurrentNonTerminal])
         print("Parsing error, Token received: ", CurrentToken.content, " -> ", CurrentToken.family)
         sys.exit()
 
@@ -44,6 +47,7 @@ def parseTokens(pTokenList, pParsingTable, pGrammar):
     ParsingTable = pParsingTable
     Grammar = pGrammar
     CurrentToken = popToken()
+    print("parsingtable: ",len(pParsingTable))
     while(CurrentToken.family != -2):
         print("CurrentContent: ",CurrentToken.content)
         checkTable()

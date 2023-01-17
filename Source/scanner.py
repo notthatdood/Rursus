@@ -20,18 +20,17 @@ from RursusToken import RursusToken
 
 # incrementum y decrementum las categoricé como palabras reservadas
 # Operators will be families 4-44
-OPERATIONS = ["<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", "\$", r'\|\>', r'\|\<', r'\$\?',
-              "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
+OPERATIONS = ["<", ">", "=", ">=", "<=", "><", "\[>>\]", "\[<<\]", "\[&?\]", "\[#?\]", "$\+", "\$\#", "\$", r'\|\>', r'\|\<', r'\$\?',
+              "\+", "\-", "\*", "%", "\/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
               "patentibus", "prope", "scripturam", "lectio", "partum", "ligo", ">>", "<<"]
 
 # Reserved words will be families 45 and onwards
 RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis", "statuo", "liber", "ordo", "autem",
             "conjugo", "dixi", "firmamentum", "detrimentum", "casus", "neco", "finis", "aeger", "initum", "opus",
-            "dixi", "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo",
+            "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo",
             "claudeo", "directus", "est", "sum", "dito", "nomen", "perpetuus", "furibundus", "commutabilis", "exemplar",
             "corpus", "in", "veridicus", "falsidicus", "\.", "\,", "\(", "\)", "\[", "\]", "\{", "\}"]
 #print("Total tokens", len(RESERVED)+len(OPERATIONS)+4)
-
 INTEGERS = r'[\-]?\b[0-9]+\b'  # Family 0
 
 IDENTIFIERS = "[\w\-]+"  # Family 1

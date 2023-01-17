@@ -31,7 +31,6 @@ def main():
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
     # Parser section--------------------------------------------------------------------------------------------------------
-    
     print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/x.xls")))
 
 
