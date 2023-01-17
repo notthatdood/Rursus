@@ -1,35 +1,42 @@
 import Scanner
 import Parser
 import parseParsingTable
+import GrammarRules
 from nltk import word_tokenize
 
-#TODO: 
+# TODO:
 #    -(NTH) Pass parsing table file as a parameter or remove the need for it if possible
 
+
 def printTokens():
-    for i in range(0,len(Scanner.TOKENOBJECTLIST)):
-        print("|   |" + Scanner.TOKENOBJECTLIST[i].content + " -> " + Scanner.TOKENOBJECTLIST[i].type," -> " + str(Scanner.TOKENOBJECTLIST[i].family), end = '')
+    for i in range(0, len(Scanner.TOKENOBJECTLIST)):
+        print("|   |" + Scanner.TOKENOBJECTLIST[i].content + " -> " +
+              Scanner.TOKENOBJECTLIST[i].type, " -> " + str(Scanner.TOKENOBJECTLIST[i].family), end='')
         if (((i+1) % 4 == 0)):
             print("|   | \n")
 
-#When running file without converting to .exe
+# When running file without converting to .exe
 def main():
-    parsingTable = parseParsingTable.getParsingTable("Source\GTablaParsing.java")
-    #Scanner section-------------------------------------------------------------------------------------------------------
-    with open('Source/RursusTestPrograms/prueba3.rur','r') as file:
+    parsingTable = parseParsingTable.getParsingTable(
+        "Source\GTablaParsing.java")
+    # Scanner section-------------------------------------------------------------------------------------------------------
+    with open('Source/RursusTestPrograms/prueba3.rur', 'r') as file:
         script = file.read()
     tokenList = word_tokenize(script)
+
     tokenList = Scanner.removeComments(tokenList)
+
     Scanner.cleanTokens(tokenList)
-    #Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
+    # Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
-    #Parser section--------------------------------------------------------------------------------------------------------
+    # Parser section--------------------------------------------------------------------------------------------------------
     
-    Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable)
+    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/x.xls")))
+
 
 main()
-#When converting file to .exe
+# When converting file to .exe
 """
 if __name__ == "__main__":
     if len(sys.argv)>1:
@@ -51,4 +58,3 @@ if __name__ == "__main__":
 
         print(ERRORLIST)
 """
-

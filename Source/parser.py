@@ -6,15 +6,17 @@ from RursusToken import RursusToken
 
 # TODO(s) remaining:
 
-STACK = []
-TOKENLIST = []
-PARSINGTABLE = []
-
+Stack = []
+TokenList = []
+ParsingTable = []
+Grammar = []
+CurrentToken = []
+CurrentNonTerminal = 0
 
 def popToken():
-    global TOKENLIST
-    if len(TOKENLIST) > 0:
-        return TOKENLIST.pop(0)
+    global TokenList
+    if len(TokenList) > 0:
+        return TokenList.pop(0)
     else:
         return RursusToken("EOF", -2, "Id")
 
@@ -22,25 +24,29 @@ def popToken():
 # TODO: definir lógica
 
 
-def checkTable(pCurrentToken):
-    if (PARSINGTABLE[pCurrentToken.family] != -1):
-        print("a")
+def checkTable():
+    global ParsingTable, CurrentToken, Stack, Grammar, CurrentNonTerminal
+    CurrentNonTerminal = int(ParsingTable[CurrentNonTerminal][CurrentToken.family])
+    if (CurrentNonTerminal != -1):
+        print("current nt number: ", ParsingTable[CurrentNonTerminal][CurrentToken.family])
+        #Here we add the rule's content to the Stack
+        Stack = Grammar[CurrentNonTerminal] + Stack
         return True
     else:
-        return False
+        print(ParsingTable[CurrentNonTerminal])
+        print("Parsing error, Token received: ", CurrentToken.content, " -> ", CurrentToken.family)
+        sys.exit()
 
 
-def parseTokens(pTokenList, pParsingTable):
-    global TOKENLIST, STACK, PARSINGTABLE
-    TOKENLIST = pTokenList
-    PARSINGTABLE = pParsingTable
-    currentToken = popToken()
-    while(currentToken.family != -2):
-        if (currentToken.family == -1):
-            print("Error sintáctico, Token received: ",
-                  currentToken.content, " -> ", currentToken.family)
-        else:
-            currentToken = popToken()
-
-
-# When running file without converting to .exe
+def parseTokens(pTokenList, pParsingTable, pGrammar):
+    global TokenList, Stack, ParsingTable, Grammar, CurrentToken
+    TokenList = pTokenList
+    ParsingTable = pParsingTable
+    Grammar = pGrammar
+    CurrentToken = popToken()
+    while(CurrentToken.family != -2):
+        print("CurrentContent: ",CurrentToken.content)
+        checkTable()
+        CurrentToken = popToken()
+    print("The string is correct!")
+    return True

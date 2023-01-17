@@ -20,10 +20,11 @@ from RursusToken import RursusToken
 
 # incrementum y decrementum las categoricé como palabras reservadas
 # Operators will be families 4-44
-OPERATIONS = ["<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", "$", r'\|\>', r'\|\<', r'$\?',
+OPERATIONS = ["<", ">", "=", ">=", "<=", "><", "[>>]", "[<<]", "[&?]", "[#?]", "$\+", "\$\#", "\$", r'\|\>', r'\|\<', r'\$\?',
               "\+", "\-", "\*", "%", "/", "\:=", "\+=", "\*=", "%=", "\/=", "\:", "addere", "necar", "unionis", "intersectio", "pertinet", "vacua",
               "patentibus", "prope", "scripturam", "lectio", "partum", "ligo", ">>", "<<"]
-# Reserved words will be families 44 and onwards
+
+# Reserved words will be families 45 and onwards
 RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis", "statuo", "liber", "ordo", "autem",
             "conjugo", "dixi", "firmamentum", "detrimentum", "casus", "neco", "finis", "aeger", "initum", "opus",
             "dixi", "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo",
