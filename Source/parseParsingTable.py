@@ -30,4 +30,7 @@ def getParsingTable(pFileName):
     
     parsingTable = parsingTable[:len(parsingTable)-1]
 
+    for i in range(0,len(parsingTable)):
+        parsingTable[i] = parsingTable[i].split(",")
+
     return parsingTable
