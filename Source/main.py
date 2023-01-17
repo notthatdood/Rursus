@@ -21,11 +21,11 @@ def main():
     tokenList = word_tokenize(script)
     tokenList = Scanner.removeComments(tokenList)
     Scanner.cleanTokens(tokenList)
-
     #Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
     #Parser section--------------------------------------------------------------------------------------------------------
+    
     Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable)
 
 main()

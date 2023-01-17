@@ -2,8 +2,6 @@
 # -https://www.geeksforgeeks.org/compiler-design-ll1-parser-in-python/
 
 import sys
-import Scanner
-import main
 from RursusToken import RursusToken
 
 # TODO(s) remaining:
