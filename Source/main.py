@@ -1,6 +1,6 @@
 import Scanner
 import Parser
-import parseParsingTable
+import cleanParsingTable
 import GrammarRules
 from nltk import word_tokenize
 
@@ -17,7 +17,7 @@ def printTokens():
 
 # When running file without converting to .exe
 def main():
-    parsingTable = parseParsingTable.getParsingTable(
+    parsingTable = cleanParsingTable.getParsingTable(
         "Source\GTablaParsing.java")
     # Scanner section-------------------------------------------------------------------------------------------------------
     with open('Source/RursusTestPrograms/prueba3.rur', 'r') as file:
@@ -27,11 +27,12 @@ def main():
     tokenList = Scanner.removeComments(tokenList)
 
     Scanner.cleanTokens(tokenList)
+    #printTokens()
     # Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
     # Parser section--------------------------------------------------------------------------------------------------------
-    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/x.xls")))
+    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/Grammar.xls")))
 
 
 main()

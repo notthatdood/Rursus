@@ -1,6 +1,5 @@
 #made adapting code from:
 #   -https://www.geeksforgeeks.org/reading-excel-file-using-python/
-import math
 import pandas
 
 def getGrammar(pFileName):
@@ -10,7 +9,11 @@ def getGrammar(pFileName):
     grammar = []
     for i in ogGrammar:
         if type(i[0]) is str:
-            grammar = grammar + [i]
+            rule=[]
+            for j in i:
+                if type(j) is str:
+                    rule +=[j]
+            grammar = grammar + [rule]
     return grammar
 
 #getGrammar("Source/x.xls")
