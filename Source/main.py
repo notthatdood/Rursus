@@ -1,6 +1,7 @@
 import Scanner
 import Parser
 import cleanParsingTable
+import cleanRightSides
 import GrammarRules
 from nltk import word_tokenize
 
@@ -18,6 +19,8 @@ def printTokens():
 # When running file without converting to .exe
 def main():
     parsingTable = cleanParsingTable.getParsingTable(
+        "Source\GTablaParsing.java")
+    rightSidesTable = cleanRightSides.getRightSidesTable(
         "Source\GTablaParsing.java")
     # Scanner section-------------------------------------------------------------------------------------------------------
     with open('Source/RursusTestPrograms/prueba3.rur', 'r') as file:
