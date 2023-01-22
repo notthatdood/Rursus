@@ -3,7 +3,8 @@ import Parser
 import cleanParsingTable
 import GrammarRules
 from nltk import word_tokenize
-
+import nltk
+nltk.download('punkt')
 # TODO:
 #    -(NTH) Pass parsing table file as a parameter or remove the need for it if possible
 
@@ -17,10 +18,10 @@ def printTokens():
 
 # When running file without converting to .exe
 def main():
-    parsingTable = cleanParsingTable.getParsingTable(
-        "Source\GTablaParsing.java")
+    parsingTable = cleanParsingTable.getParsingTable("GTablaParsing.java")
     # Scanner section-------------------------------------------------------------------------------------------------------
-    with open('Source/RursusTestPrograms/prueba4.rur', 'r') as file:
+    #with open('RursusTestPrograms/Expresiones/R-Expresiones.rur', 'r') as file:
+    with open('RursusTestPrograms/prueba4.rur', 'r') as file:
         script = file.read()
     tokenList = word_tokenize(script)
     tokenList = Scanner.removeComments(tokenList)
@@ -31,7 +32,7 @@ def main():
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
     # Parser section--------------------------------------------------------------------------------------------------------
-    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/tempGrammar.xls")))
+    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("tempGrammar.xls")))
 
 
 main()

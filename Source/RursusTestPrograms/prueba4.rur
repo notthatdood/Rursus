@@ -1,52 +1,24 @@
 nomen EJEMPLO .
 <#This is an example made by our professor with a few modifications#>
 perpetuus   <#  Abre la sección de constantes #>
-    A dito 45 .
-    B dito 'K' . 
-    C dito {'A','B','C'} .
 
 furibundus  <#  Abre la sección de tipos #>
 
-   Edad sum numerus .
-   <#tablero sum matriz . #>  
-   Persona sum conjugo
-        catena nombre .
-        numerus cedula .
-        <#edad vejez .(No lo permitimos por ahora)#>
-   dixi .
-
 commutabilis <#  Abre la sección de variables #> 
 
-   numerus X est 5 .
-   numerus Y est 4 .
-   <#numerus Z .(No lo vamos a permitir por ahora)#>
-
-   <#ordo [3][4] autem imago Var1 est {[ {[1 , 2 , 3 , 4]} , {[5 , 6 , 7 , 8]} , {[9 , 10 , 11 , 12]} ]} .(No lo vamos a permitir por ahora)#>
-
-   <#conjugo
-        catena nombre .
-        numerus cedula .
-        edad vejez . (No lo vamos a permitir por ahora)
-   dixi Juan est << "Juan Carlos Ramirez" , 123456 , 88 >> .
-   Persona Pedro est << "Pedro" , 666 , 66 >> .(No lo permitimos por ahora)#>
-  
 exemplar  <#  Abre la sección de prototipos #>
 
 corpus  <#  Abre la sección de rutinas #>
 
 firmamentum  <#  Punto de entrada del programa #>
     initum
-       A := 4 .
+        A * 1 .
        tempus A < 10 opus
        initum
             in B > C certus
-                B := 8 .
+                B = 8 .
             mentiri
-                B := 1 . .
-            incrementum A .
-            in B > C mentiri
-                B := 1 .
-            certus
-                B := 8 . .
-       finis .
-    finis .
+                B = 1 . 
+            .
+    finis 
+.

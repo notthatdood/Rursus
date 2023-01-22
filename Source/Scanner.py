@@ -165,8 +165,8 @@ def checkOperations(pTokenList, pTokenPos):
 
         elif (len(exResult1) > 0):
             statistics[0][1] += 1
-
-            if ((pTokenList[pTokenPos]==":") and (pTokenList[pTokenPos + 1]=="=")):
+            listOperation = [":","-","+","*","/","%","<",">"]
+            if ((pTokenList[pTokenPos] in listOperation ) and (pTokenList[pTokenPos + 1]=="=")):
                 pTokenList[pTokenPos] +=pTokenList.pop(pTokenPos + 1)
             TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos],
                                             i+4, "Operation")]
@@ -267,6 +267,7 @@ def printTokens():
               TOKENOBJECTLIST[i].type, " -> " + str(TOKENOBJECTLIST[i].family), end='')
         if (((i+1) % 4 == 0)):
             print("|   | \n")
+
 
 
 # para correr sin convertir a .exe
