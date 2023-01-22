@@ -1,24 +1,25 @@
 /*
  * GTablaParsing.java
  *
- * 2023/01/22 13:41:11
+ * 2023/01/22 16:41:32
  *
  * Archivo generado por GikGram 2.0
  *
- * Copyright ï¿½ Olminsky 2011 Derechos reservados
- * Reproducciï¿½n sin fines de lucro permitida
+ * Copyright © Olminsky 2011 Derechos reservados
+ * Reproducción sin fines de lucro permitida
  */
-package Source;
+
+package Gramatica;
 
 /**
  * Esta clase contiene la tabla de parsing
- * y los mï¿½todos necesarios para acceder a ella
+ * y los métodos necesarios para acceder a ella
  */
 abstract class GTablaParsing
 {
 	/**
 	 * Tabla de parsing
-	 * Contiene los nï¿½meros de regla que hay que ejecutar
+	 * Contiene los números de regla que hay que ejecutar
 	 * con base a los no-terminales (filas) y los terminales (columnas)
 	 */
 	private static final int[][] TablaParsing =
@@ -57,18 +58,16 @@ abstract class GTablaParsing
 		/* <switch> */ {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 		/* <switchCase> */ {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,99,98,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 		/* <if> */ {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
-		/* <simbolo> */ {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,101,102,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,105,103,104,-1,-1,-1,-1,-1,-1},
-	/* Doble predicciï¿½n en la lï¿½nea siguiente con el terminal . */
-		/* <terminador> */ {107,107,107,107,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,107,107,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,107,107,107,-1,107,107,-1,107,107,-1,-1,107,107,107,107,107,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,107,107,107,106,107,107,107,-1,-1,107,-1,-1,-1}
+		/* <simbolo> */ {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,101,102,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,105,103,104,-1,-1,-1,-1,-1,-1}
 	};
 
 	/**
-	 * Mï¿½todo getTablaParsing
-			Devuelve el nï¿½mero de regla contenida en la tabla de parsing
+	 * Método getTablaParsing
+			Devuelve el número de regla contenida en la tabla de parsing
 	 * @param numNoTerminal
-			Nï¿½mero del no-terminal
+			Número del no-terminal
 	 * @param numTerminal
-			Nï¿½mero del terminal
+			Número del terminal
 	 */
 	static final int getTablaParsing(int numNoTerminal, int numTerminal)
 	{

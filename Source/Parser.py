@@ -129,9 +129,8 @@ def parseTokens(pTokenList, pParsingTable, pGrammar):
     #print("NonTerminalList: ",len(NonTerminalList))
     CurrentToken = popToken()
     #print("parsingtable: ",len(pParsingTable))
-    for i in Grammar:
-        print(i)
-    #checkTable()
+
+    checkTable()
 
 
     print("The string is correct!")
