@@ -1,7 +1,6 @@
 import Scanner
 import Parser
 import cleanParsingTable
-import cleanRightSides
 import GrammarRules
 from nltk import word_tokenize
 
@@ -20,13 +19,11 @@ def printTokens():
 def main():
     parsingTable = cleanParsingTable.getParsingTable(
         "Source\GTablaParsing.java")
-    rightSidesTable = cleanRightSides.getRightSidesTable(
-        "Source\GTablaParsing.java")
     # Scanner section-------------------------------------------------------------------------------------------------------
-    with open('Source/RursusTestPrograms/prueba3.rur', 'r') as file:
+    with open('Source/RursusTestPrograms/prueba4.rur', 'r') as file:
         script = file.read()
     tokenList = word_tokenize(script)
-
+    
     tokenList = Scanner.removeComments(tokenList)
 
     Scanner.cleanTokens(tokenList)
@@ -35,7 +32,7 @@ def main():
     #print("Tokens after cleanup: ", len(Scanner.TOKENOBJECTLIST))
     #print("Estadisticas: ", Scanner.statistics)
     # Parser section--------------------------------------------------------------------------------------------------------
-    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/Grammar.xls")))
+    print(Parser.parseTokens(Scanner.TOKENOBJECTLIST, parsingTable, GrammarRules.getGrammar("Source/tempGrammar.xls")))
 
 
 main()

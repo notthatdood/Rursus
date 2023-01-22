@@ -33,6 +33,7 @@ def createNonTerminalList():
 #This funciton will try to match the token
 def matchTokens():
     global CurrentToken, Stack, Top
+    print("currentToken: ", CurrentToken.content, " family: ", CurrentToken.family)
     while (Top not in NonTerminalList):
         print("###############################################################################")
         print("StackIn: ", Stack)
@@ -73,6 +74,7 @@ def checkTable():
     #Top = Stack.pop(0)
     #CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
     #Stack = Grammar[CurrentNonTerminal][2:] + Stack
+    print("Stack: ", Stack)
     while(CurrentToken.family != -2):
         if (CurrentNonTerminal == -1):
             print("Parsing error, Token received: ", CurrentToken.content, " -> ", CurrentToken.family)
@@ -83,15 +85,17 @@ def checkTable():
         
 
         #Here we add the rule's content to the Stack
-        print("Stack: ", Stack)
-        print("currentToken: ", CurrentToken.content, " family: ", CurrentToken.family)
+        
+        
         if (Top not in NonTerminalList):
             matchTokens()
-            #CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
-        else:
             CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
-            print("Top: ", Top, "Index: ", ParsingTable[11][95])
+        else:
+            print("currentToken: ", CurrentToken.content, " family: ", CurrentToken.family)
+            CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
+            print("Top: ", Top, "Index: ", ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
             Stack = Grammar[CurrentNonTerminal][2:] + Stack
+        print("Stack: ", Stack)
     #return True
         
     
