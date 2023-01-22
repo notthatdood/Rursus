@@ -223,7 +223,6 @@ def cleanTokens(pTokenList):
         # checks for operations
         [pTokenList, result] = checkOperations(pTokenList, tokenPos)
         if result == True:
-            print(pTokenList[tokenPos])
             tokenPos += 1
             continue
 
