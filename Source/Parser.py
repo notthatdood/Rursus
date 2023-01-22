@@ -32,7 +32,7 @@ def createNonTerminalList():
 
 #This funciton will try to match the token
 def matchTokens():
-    global CurrentToken, Stack, Top
+    global ParsingTable, CurrentToken, Stack, Grammar, CurrentNonTerminal, NonTerminalList, Top
     print("currentToken: ", CurrentToken.content, " family: ", CurrentToken.family)
     while (Top not in NonTerminalList):
         print("###############################################################################")
@@ -40,30 +40,49 @@ def matchTokens():
         print("TopIn: ", Top)
         if (Top == CurrentToken.content):
             print("matched: ", CurrentToken.content, "with : ", Top)
-            Top = Stack.pop(0)
             CurrentToken = popToken()
+            if(len(Stack)==0):
+                break
+            Top = Stack.pop(0)
+            
         elif ((CurrentToken.family == 0) and Top == "entero"):
             print("matched: ", CurrentToken.content, "with : ", Top)
-            Top = Stack.pop(0)
             CurrentToken = popToken()
+            if(len(Stack)==0):
+                break
+            Top = Stack.pop(0)
+            
         elif ((CurrentToken.family == 1) and Top == "id"):
             print("matched: ", CurrentToken.content, "with : ", Top)
-            Top = Stack.pop(0)
             CurrentToken = popToken()
+            if(len(Stack)==0):
+                break
+            Top = Stack.pop(0)
+            
         elif ((CurrentToken.family == 2) and Top == "caracter"):
             print("matched: ", CurrentToken.content, "with : ", Top)
-            Top = Stack.pop(0)
             CurrentToken = popToken()
+            if(len(Stack)==0):
+                break
+            Top = Stack.pop(0)
+            
         elif ((CurrentToken.family == 3) and Top == "string"):
             print("matched: ", CurrentToken.content, "with : ", Top)
-            Top = Stack.pop(0)
             CurrentToken = popToken()
+            if(len(Stack)==0):
+                break
+            Top = Stack.pop(0)
+            
         else:
             print("Parsing error")
             print("Token received: ", CurrentToken.content, " | token's family: ", CurrentToken.family)
             print("Token expected: ", Top)
             sys.exit()
+        
     Stack = [Top] + Stack 
+    if((len(Stack)>0) and (Top in NonTerminalList)):
+        CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
+        print("posntl: ",NonTerminalList.index(Top), " | tokenfamily: ", CurrentToken.family, " | currennt: ", ParsingTable[NonTerminalList.index(Top)][CurrentToken.family], " | CurrentRUle: ", Grammar[CurrentNonTerminal])
     print("###############################################################################*")
 
 # TODO: aplicar lógica del stack
@@ -89,7 +108,7 @@ def checkTable():
         
         if (Top not in NonTerminalList):
             matchTokens()
-            CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
+            
         else:
             print("currentToken: ", CurrentToken.content, " family: ", CurrentToken.family)
             CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
@@ -110,8 +129,9 @@ def parseTokens(pTokenList, pParsingTable, pGrammar):
     #print("NonTerminalList: ",len(NonTerminalList))
     CurrentToken = popToken()
     #print("parsingtable: ",len(pParsingTable))
-
-    checkTable()
+    for i in Grammar:
+        print(i)
+    #checkTable()
 
 
     print("The string is correct!")

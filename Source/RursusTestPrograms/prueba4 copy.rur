@@ -44,9 +44,10 @@ firmamentum  <#  Punto de entrada del programa #>
             mentiri
                 B := 1 . .
             incrementum A .
-            in B > C mentiri
-                B := 1 .
-            certus
-                B := 8 . .
+            in B > C certus
+                B := 8 .
+            mentiri
+                B := 1 . .
+            
        finis .
     finis .

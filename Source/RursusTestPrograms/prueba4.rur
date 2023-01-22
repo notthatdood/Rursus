@@ -12,13 +12,13 @@ corpus  <#  Abre la sección de rutinas #>
 
 firmamentum  <#  Punto de entrada del programa #>
     initum
-        A * 1 .
-       tempus A < 10 opus
-       initum
+        A := 1 .
+        tempus A < 10 opus
+        initum
             in B > C certus
                 B = 8 .
             mentiri
                 B = 1 . 
             .
-    finis 
-.
+        finis .
+    finis .
