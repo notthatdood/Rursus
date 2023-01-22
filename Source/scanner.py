@@ -7,6 +7,7 @@
 
 import re
 import sys
+from nltk import word_tokenize
 from RursusToken import RursusToken
 
 # TODO(s) remaining: 2
@@ -141,6 +142,9 @@ def checkReserved(pToken):
 
 def checkOperations(pTokenList, pTokenPos):
     global TOKENOBJECTLIST
+    dospuntos=False
+    if(pTokenList[pTokenPos]==':'):
+        dospuntos=True
     nextTokenPos = pTokenPos + 1
     # for regEx in OPERATIONS:
     for i in range(0, len(OPERATIONS)):
@@ -161,6 +165,11 @@ def checkOperations(pTokenList, pTokenPos):
 
         elif (len(exResult1) > 0):
             statistics[0][1] += 1
+
+            if ((pTokenList[pTokenPos]==":") and (pTokenList[pTokenPos + 1]=="=")):
+                pTokenList[pTokenPos] +=pTokenList.pop(pTokenPos + 1)
+            TOKENOBJECTLIST += [RursusToken(pTokenList[pTokenPos],
+                                            i+4, "Operation")]
             return [pTokenList, True]
 
     return [pTokenList, False]
@@ -193,8 +202,6 @@ def checkIdentifiers(pTokenList, pTokenPos):
     return False
 
 # This function will join tokens that should be one and count the amount of each category of tokens there is
-
-
 def cleanTokens(pTokenList):
     resultTokenList = []
     result = False
@@ -216,6 +223,7 @@ def cleanTokens(pTokenList):
         # checks for operations
         [pTokenList, result] = checkOperations(pTokenList, tokenPos)
         if result == True:
+            print(pTokenList[tokenPos])
             tokenPos += 1
             continue
 
@@ -239,6 +247,7 @@ def cleanTokens(pTokenList):
 
         tokenPos += 1
         print(tokenPos)
+    
     return pTokenList
 
 
@@ -250,9 +259,19 @@ def popToken():
         return RursusToken("EOF", -2, "Id")
 
 
+
+
+def printTokens():
+    for i in range(0, len(TOKENOBJECTLIST)):
+        print("|   |" + TOKENOBJECTLIST[i].content + " -> " +
+              TOKENOBJECTLIST[i].type, " -> " + str(TOKENOBJECTLIST[i].family), end='')
+        if (((i+1) % 4 == 0)):
+            print("|   | \n")
+
+
 # para correr sin convertir a .exe
 """
-with open('prueba3.rur','r') as file:
+with open('Source/RursusTestPrograms/prueba4.rur', 'r') as file:
     script = file.read()
 
 tokenList = word_tokenize(script)
@@ -261,8 +280,7 @@ tokenList = removeComments(tokenList)
 print("numero de tokens sin comments: ", len(tokenList))
 
 tokenList = cleanTokens(tokenList)
-print(tokenList)
-
+printTokens()
 print("numero de tokens luego de limpieza: ", len(tokenList))
 print("Estadisticas: ", statistics)
 

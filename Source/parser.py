@@ -80,7 +80,7 @@ def checkTable():
             print("Parsing error, Token received: ", CurrentToken.content, " -> ", CurrentToken.family)
             sys.exit()
 
-        print("---------------------------------------------------------------")
+        print("\n\n---------------------------------------------------------------")
         Top = Stack.pop(0)
         
 
@@ -116,3 +116,5 @@ def parseTokens(pTokenList, pParsingTable, pGrammar):
 
     print("The string is correct!")
     return True
+
+

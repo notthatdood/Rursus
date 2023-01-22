@@ -23,9 +23,8 @@ def main():
     with open('Source/RursusTestPrograms/prueba4.rur', 'r') as file:
         script = file.read()
     tokenList = word_tokenize(script)
-    
     tokenList = Scanner.removeComments(tokenList)
-
+    
     Scanner.cleanTokens(tokenList)
     #printTokens()
     # Uncomment this section to see some statistics of the tokenization process like number of integers, identifiers, etc...
