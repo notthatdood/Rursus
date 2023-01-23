@@ -4,6 +4,5 @@
 *.OBJ
 *.TXT
 *.PDF
-*.JAVA
 Source/__pycache__/
 cmd.exe.lnk
