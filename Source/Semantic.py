@@ -208,10 +208,9 @@ def analyzeReserved(pToken):
             print(pToken.content, "default")
 
 def checkBothSides(CheckedTokenList, TokenList):
-    print("checkingbothsides")
-    CheckedTokenList[0]
-    TokenList[0]
-
+    if (((CheckedTokenList[0].type=="Operation") or (CheckedTokenList[0].type=="Id")) and ((TokenList[0].type=="Operation") or (TokenList[0].type=="Id"))):
+        return True
+    return False
 
 
 #TODO: analyze IDs
