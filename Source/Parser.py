@@ -14,11 +14,14 @@ NonTerminalList = []
 CurrentToken = []
 CurrentNonTerminal = 0
 Top = ""
+CheckedTokenList = []
 
 def popToken():
-    global TokenList
+    global TokenList, CheckedTokenList
     if len(TokenList) > 0:
-        return TokenList.pop(0)
+        popped = TokenList.pop(0)
+        CheckedTokenList = [popped] + CheckedTokenList
+        return popped
     else:
         return RursusToken("EOF", -2, "Id")
 
@@ -66,7 +69,7 @@ def matchTokens():
                 break
             Top = Stack.pop(0)
             
-        elif ((CurrentToken.family == 3) and Top == "string"):
+        elif ((CurrentToken.family == 3) and Top == "strings"):
             print("matched: ", CurrentToken.content, "with : ", Top)
             CurrentToken = popToken()
             if(len(Stack)==0):

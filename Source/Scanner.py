@@ -31,6 +31,7 @@ RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis"
             "itero", "usque", "sigla", "panis", "auctum", "gradus", "tempus", "certus", "mentiri", "pergo",
             "claudeo", "directus", "est", "sum", "dito", "nomen", "perpetuus", "furibundus", "commutabilis", "exemplar",
             "corpus", "in", "veridicus", "falsidicus", "\.", "\,", "\(", "\)", "\[", "\]", "\{", "\}", "efficio"]
+print(len(RESERVED))
 #print("Total tokens", len(RESERVED)+len(OPERATIONS)+4)
 INTEGERS = r'[\-]?\b[0-9]+\b'  # Family 0
 
