@@ -1,0 +1,15 @@
+nomen EJEMPLO .
+<#Tests the sections block without code #>
+
+<#perpetuus     Abre la sección de constantes #>
+
+furibundus  <#  Abre la sección de tipos #>
+
+commutabilis <#  Abre la sección de variables #> 
+
+exemplar  <#  Abre la sección de prototipos #>
+
+corpus  <#  Abre la sección de rutinas #>
+
+firmamentum  <#  Punto de entrada del programa #>
+.

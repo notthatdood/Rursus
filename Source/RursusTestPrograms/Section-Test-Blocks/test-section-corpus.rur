@@ -1,0 +1,23 @@
+nomen EJEMPLO . 
+
+corpus
+directus ejemplo1(numerus A, catena S ):
+    commutabilis
+        numerus X .   
+        conjugo
+            numerus horas .
+            numerus segundos .
+        dixi Tiempo est < 3 , 15 , 45  > .
+        catena Hola .
+        ordo [5] autem imago vocales est { 'A' , 'E' , 'I' , 'O', 'U' } .
+
+    initum
+
+    finis
+.
+
+efficio fibonacci(numerus N) : numerus 
+    initum
+
+    finis
+.

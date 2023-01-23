@@ -1,0 +1,11 @@
+nomen EJEMPLO .
+
+furibundus  <#  Abre la sección de tipos #>
+
+   Edad sum numerus .
+   tablero sum matriz . 
+   Persona sum conjugo
+        catena nombre .
+        numerus cedula .
+        Edad vejez .
+   dixi .

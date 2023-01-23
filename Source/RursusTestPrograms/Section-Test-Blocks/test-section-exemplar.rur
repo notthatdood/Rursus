@@ -1,0 +1,5 @@
+nomen EJEMPLO . 
+
+exemplar  <#  Abre la sección de prototipos #>
+fibonacci(numerus N).
+divisibles(numerus num, numerus div, duails flag).

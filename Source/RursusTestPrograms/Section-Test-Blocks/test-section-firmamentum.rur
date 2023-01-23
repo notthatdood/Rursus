@@ -1,0 +1,19 @@
+nomen EJEMPLO .
+
+firmamentum  <#  Punto de entrada del programa #>
+    initum
+       A = 4 + A . 
+       tempus A < 10 opus
+       initum
+            in B > C certus
+                B = 8 .
+            mentiri
+                B = 1 . .
+            incrementum A .
+            in B > C certus
+                B = 8 .
+            mentiri
+                B = 1 . .
+            
+       finis .
+    finis .
