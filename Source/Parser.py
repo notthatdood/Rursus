@@ -85,7 +85,7 @@ def matchTokens():
     Stack = [Top] + Stack 
     if((len(Stack)>0) and (Top in NonTerminalList)):
         CurrentNonTerminal = int(ParsingTable[NonTerminalList.index(Top)][CurrentToken.family])
-        print("posntl: ",NonTerminalList.index(Top), " | tokenfamily: ", CurrentToken.family, " | currennt: ", ParsingTable[NonTerminalList.index(Top)][CurrentToken.family], " | CurrentRUle: ", Grammar[CurrentNonTerminal])
+        
     print("###############################################################################*")
 
 # TODO: aplicar lógica del stack
@@ -132,7 +132,6 @@ def parseTokens(pTokenList, pParsingTable, pGrammar):
     #print("NonTerminalList: ",len(NonTerminalList))
     CurrentToken = popToken()
     #print("parsingtable: ",len(pParsingTable))
-
     checkTable()
 
 

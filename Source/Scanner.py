@@ -34,7 +34,6 @@ RESERVED = ["incrementum", "decrementum", "numerus", "imago", "catena", "dualis"
             "scribonumerus" , "scriboimago" , "scribocatena" , "scriboliber","legonumerus" , "legoimago" , "legocatena" , 
             "legoliber"]
 
-print(len(RESERVED))
 #print("Total tokens", len(RESERVED)+len(OPERATIONS)+4)
 INTEGERS = r'[\-]?\b[0-9]+\b'  # Family 0
 
