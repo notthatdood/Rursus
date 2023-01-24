@@ -4,7 +4,11 @@ perpetuus   <#  Abre la sección de constantes #>
 
 furibundus  <#  Abre la sección de tipos #>
 
+
 commutabilis <#  Abre la sección de variables #> 
+numerus A est 5 .
+numerus B est 5 .
+numerus C est 5 .
 
 exemplar  <#  Abre la sección de prototipos #>
 

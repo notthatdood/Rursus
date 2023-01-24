@@ -3,6 +3,7 @@
 
 import sys
 from RursusToken import RursusToken
+import Semantic
 
 # TODO(s) remaining:
 
@@ -57,6 +58,13 @@ def matchTokens():
             
         elif ((CurrentToken.family == 1) and Top == "id"):
             print("matched: ", CurrentToken.content, "with : ", Top)
+            #This is to catch undefined types and identifiers but undefined type catching doesn't work 
+            if (not (Semantic.usesType(CurrentToken)) and not (Semantic.declaresType(CurrentToken, TokenList))):
+                if (not (Semantic.usesID(CurrentToken)) and not (Semantic.declaresID(CurrentToken, TokenList))):
+                    print("Parsing error")
+                    print("Token received: ", CurrentToken.content, " | token's family: ", CurrentToken.family)
+                    print("Token is not a defined type or identifier")
+                    sys.exit()
             CurrentToken = popToken()
             if(len(Stack)==0):
                 break

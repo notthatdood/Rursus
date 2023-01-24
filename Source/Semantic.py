@@ -222,11 +222,16 @@ def usesType(pToken):
     return False
 
 # Checks if the token is within the type declaring section
+# There are better ways to do this validation. This is the easiest one but can be wrong
 def declaresType(pToken, pTokenList):
+    global TypeList
     for i in pTokenList:
         if (i.content=="commutabilis"):
+            TypeList += [pToken.content.lower()]
             return True
+    print(TypeList)
     return False
+
 # Checks if the token is in the tokenList
 def usesID(pToken):
     global IdentifierList
@@ -235,10 +240,15 @@ def usesID(pToken):
     return False
 
 # Checks if the token is within the variable declaring section
+# There are better ways to do this validation. This is the easiest one but can be wrong
 def declaresID(pToken, pTokenList):
+    global IdentifierList
     for i in pTokenList:
         if (i.content=="exemplar"):
+            IdentifierList += [pToken.content.lower()]
+            print("------------------declaresid")
             return True
+    print(IdentifierList)
     return False
 
 def analyzeId(pToken):
