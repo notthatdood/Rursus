@@ -3,7 +3,6 @@ import Parser
 import cleanParsingTable
 import GrammarRules
 from nltk import word_tokenize
-import nltk
 # TODO:
 #    -(NTH) Pass parsing table file as a parameter or remove the need for it if possible
 
